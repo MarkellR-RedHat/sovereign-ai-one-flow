@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign AI in One Flow: One Control Plane for Models, GPUs, Tools, and Agents</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;900&family=Red+Hat+Text:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Red Hat Text', sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 900;
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        h2 {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 1.3;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EE0000;
+            color: #1a1a1a;
+        }
+
+        h3 {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 1.4;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .byline {
+            font-family: 'Red Hat Text', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .note {
+            background-color: #f5f8fc;
+            border-left: 4px solid #0066CC;
+            padding: 20px 24px;
+            margin: 28px 0 28px 20px;
+            font-size: 16px;
+        }
+
+        .note strong {
+            font-weight: 500;
+            color: #0066CC;
+        }
+
+        .cta-box {
+            background-color: #fff5f5;
+            border-left: 4px solid #EE0000;
+            padding: 28px 32px;
+            margin: 48px 0;
+        }
+
+        .cta-box h3 {
+            margin-top: 0;
+            color: #EE0000;
+        }
+
+        .cta-box a {
+            color: #EE0000;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.2s;
+        }
+
+        .cta-box a:hover {
+            border-bottom-color: #EE0000;
+        }
+
+        footer {
+            max-width: 720px;
+            margin: 60px auto 0;
+            padding: 32px 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 15px;
+            color: #666;
+        }
+
+        footer a {
+            color: #0066CC;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            margin-right: 20px;
+        }
+
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+        }
+
+        strong {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            article {
+                padding: 20px 10px;
+            }
+
+            .note {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Sovereign AI in One Flow: One Control Plane for Models, GPUs, Tools, and Agents</h1>
+
+        <div class="byline">
+            By Markell Rawls | AI Developer Advocate, Red Hat<br>
+            July 21, 2026
+        </div>
+
+        <p>Here's a situation you've probably lived through: your AI team has one tool for model serving, another for GPU scheduling, a third for security testing, a fourth for cost tracking, and something else entirely for access control.</p>
+
+        <p>Five tools for five problems. Each one with its own CLI, its own auth system, its own way of thinking about tenants and quotas and logs. Your platform engineers are maintaining integration glue between all of them. Your security team has to audit five separate surfaces. Your finance team is manually correlating usage data from three different dashboards to figure out what AI is actually costing.</p>
+
+        <p>It's a mess.</p>
+
+        <p>And the worst part? Every new AI capability you add — agents, fine-tuning, guardrails, whatever — brings another tool into the stack. The problem compounds.</p>
+
+        <h2>One Control Plane, One Flow</h2>
+
+        <p>What if you didn't have to live like that?</p>
+
+        <p>What if there was ONE control plane that handled governance, isolation, transparency, safety, and sovereign AI operations — all in a single coherent flow?</p>
+
+        <p>That's what we're building with the Platform/Scale stack on OpenShift AI. Not a collection of point solutions duct-taped together. A real control plane where each capability builds on the previous one, where every piece shares the same primitives, where you configure it once and it just works.</p>
+
+        <p>Let me walk you through what that actually looks like.</p>
+
+        <h2>Governance: MaaS Subscriptions as the Entry Point</h2>
+
+        <p>First principle: no AI consumption without governance.</p>
+
+        <p>In our stack, that starts with Model-as-a-Service subscriptions. You want access to Claude or Llama or whatever? You don't just spin up a pod and start hitting endpoints. You subscribe to a tier — Free, Premium, Enterprise — and you get an API key tied to a quota.</p>
+
+        <div class="note">
+            <strong>What is MaaS?</strong> Model-as-a-Service is exactly what it sounds like — models exposed as managed services with subscriptions, quotas, and SLAs. Think "you get 100K tokens/month on the Free tier, 10M on Premium, unlimited on Enterprise." It's how you productionize model access without everyone deploying their own inference stack.
+        </div>
+
+        <p>This is self-service, but it's governed self-service. Developers get their API keys instantly. They don't need to file a ticket or wait for procurement. But platform teams define the tiers, set the quotas, and enforce the limits. Finance knows exactly what consumption is allowed before it happens.</p>
+
+        <p>Governance isn't a gate you walk through once. It's the foundation everything else builds on.</p>
+
+        <h2>Isolation: Multi-Tenant Boundaries That Actually Hold</h2>
+
+        <p>Once you have governance, you need isolation. Because if three teams are sharing one cluster, you can't have Team A's model inference spilling into Team B's GPU pool, or Team C's logs exposing Team A's prompts.</p>
+
+        <p>We're doing Kubernetes-native multi-tenancy the right way. Hard network policy boundaries between tenants. GPU isolation so your accelerators are dedicated to the workload that requested them. Namespace-level RBAC so nobody sees what they shouldn't.</p>
+
+        <p>This isn't soft isolation where you trust everyone to stay in their lane. This is enforced at the infrastructure level. If you're in Tenant A, you literally cannot reach Tenant B's services. The API server won't let you. The network won't route you. The scheduler won't give you their GPUs.</p>
+
+        <div class="note">
+            <strong>Multi-tenancy in Kubernetes:</strong> True isolation means separate namespaces, network policies that block cross-tenant traffic, resource quotas that prevent noisy neighbors, and RBAC that enforces who can do what. OpenShift adds another layer with project-level isolation and SCC (Security Context Constraints) that lockdown what containers can actually do at runtime.
+        </div>
+
+        <p>Why does this matter? Because without isolation, you can't safely run production AI workloads on shared infrastructure. You end up over-provisioning — one cluster per team, one GPU pool per project — and your utilization tanks. With real isolation, you can pack workloads tight and still sleep at night.</p>
+
+        <h2>Transparency: Show Me The Money</h2>
+
+        <p>Alright, you've got governance and isolation. Now you need visibility.</p>
+
+        <p>How many tokens did Team A use last month? What did that cost? Which models are they hitting? What use cases are driving the spend? If you can't answer those questions in real-time, you don't have a production AI platform. You have a cost center waiting to explode.</p>
+
+        <p>Our observability layer gives you per-tenant token usage, broken down by model, by use case, by time window. You want to know what Claude 3.5 Sonnet cost you in June? Done. You want to see which team is burning through Premium quota fastest? Two clicks.</p>
+
+        <p>And here's the kicker: it's all tied back to the MaaS subscriptions from step one. The same tenant boundaries that enforce isolation also define the observability scope. The same quotas that govern access also drive the cost attribution. It's one coherent system.</p>
+
+        <p>Finance gets CSV exports for chargeback. Engineering gets Grafana dashboards for capacity planning. Leadership gets the "Show Me The Money" view that answers the one question that actually matters: what is AI costing us, and what are we getting for it?</p>
+
+        <h2>Safety: Guardrails at the Gateway</h2>
+
+        <p>Transparency without safety is just watching the fire burn.</p>
+
+        <p>You can see all the tokens flowing through your system. You can track every API call, every model invocation, every dollar spent. But if you're not testing for vulnerabilities and blocking bad requests at runtime, you're one prompt injection away from a very bad day.</p>
+
+        <p>That's where Garak and NeMo Guardrails come in.</p>
+
+        <div class="note">
+            <strong>What is Garak?</strong> Garak is an LLM vulnerability scanner. It throws hundreds of adversarial prompts at your models — jailbreaks, prompt injections, data leakage attempts — and reports what breaks. Think of it as a fuzzer for language models. You run it in staging before you ship. You run it continuously in production to catch drift.
+        </div>
+
+        <p>In our flow, Garak runs against staging endpoints before anything goes live. You're deploying a new model? Fine. But it doesn't hit production until Garak gives it a clean bill of health. Found a vulnerability? Fix it, re-test, then ship.</p>
+
+        <p>And in production, NeMo Guardrails sits at the gateway. It's not just logging requests — it's actively filtering them. Block PII. Enforce topic boundaries. Prevent jailbreaks in real-time. Your governance policies aren't just documentation. They're enforced in the request path.</p>
+
+        <p>Security becomes a loop, not a checkbox. Test in staging. Monitor in production. Feed findings back into policy. Rinse and repeat.</p>
+
+        <h2>The Full Flow: Governance → Isolation → Transparency → Safety → Sovereign AI</h2>
+
+        <p>Let's bring it all together. Here's what the full flow looks like:</p>
+
+        <p>A developer on Team A wants to build a RAG application. They subscribe to the Premium MaaS tier, get an API key, and start coding. The subscription enforces governance — they have 10M tokens/month, and when they hit that limit, the API starts returning 429s. No surprises.</p>
+
+        <p>Their workload runs in Tenant A's namespace. It can't see Team B's data. It can't consume Team C's GPUs. Isolation is automatic and enforced.</p>
+
+        <p>As they develop, platform engineers watch token usage climb on the observability dashboard. They can see it's Claude 3.5 Sonnet, hitting the embeddings endpoint, processing internal docs. Finance sees the same data in their monthly chargeback report. Transparency is real-time and multi-stakeholder.</p>
+
+        <p>Before the app goes to production, Garak runs a security sweep. Finds one prompt injection vector. Team A patches it. Garak re-tests. Clean. The app ships.</p>
+
+        <p>In production, NeMo Guardrails watches every request. If someone tries to trick the model into leaking PII, the request gets blocked. If usage spikes unexpectedly, alerts fire. Safety is continuous.</p>
+
+        <p>That's sovereign AI in one flow. Governance, isolation, transparency, and safety — all through one control plane, using one set of primitives, managed by one platform team.</p>
+
+        <h2>What Sovereign AI Operations Actually Looks Like</h2>
+
+        <p>Here's the thing: this isn't vendor lock-in disguised as a platform.</p>
+
+        <p>We're vendor-neutral where it matters. You want to swap Garak for something else? Go ahead — it's just a container running scans. You want to use a different observability backend? The metrics are in Prometheus format. Plug in Datadog, Splunk, whatever you want.</p>
+
+        <p>The control plane gives you primitives — subscriptions, quotas, tenants, policies — and those primitives work regardless of what models you're running, what tools you're using, or what cloud you're on.</p>
+
+        <p>That's what sovereign AI operations actually means. Your teams move fast because self-service is real. Your platform team sleeps well because isolation and governance are enforced. Finance gets their reports because observability is built-in. Security stays continuous because testing and guardrails are part of the flow.</p>
+
+        <p>And nobody's locked into a single vendor's walled garden.</p>
+
+        <p>You run this on OpenShift AI because OpenShift AI is the control plane. But the models can come from anywhere. The tools can be swapped. The infrastructure can be on-prem, in the cloud, or hybrid. You're in control.</p>
+
+        <p>That's the vision. One control plane. One flow. From governance to isolation to transparency to safety to sovereign AI operations.</p>
+
+        <p>We're building it. And it's working.</p>
+
+        <div class="cta-box">
+            <h3>Try It Yourself</h3>
+            <p>Want to see this in action? Check out the <a href="../demo/index.html">interactive demo</a> where you can explore governance policies, multi-tenant isolation, and per-tenant observability in real-time.</p>
+            <p>For more on the Platform/Scale pillar and sovereign AI operations, visit the <a href="../index.html">Sovereign AI in One Flow content hub</a>.</p>
+        </div>
+
+    </article>
+
+    <footer>
+        <div class="footer-links">
+            <a href="../index.html">Content Hub</a>
+            <a href="../demo/index.html">Interactive Demo</a>
+        </div>
+        <div>
+            Markell Rawls | AI Developer Advocate, Red Hat
+        </div>
+    </footer>
+</body>
+</html>
