@@ -1,309 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign AI in One Flow: One Control Plane for Models, GPUs, Tools, and Agents</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;900&family=Red+Hat+Text:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sovereign AI Is Not a Feature. It's Agency. | Red Hat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;900&family=Red+Hat+Text:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Red Hat Text', sans-serif;
-            font-size: 17px;
-            line-height: 1.7;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            padding: 20px;
-        }
+    body {
+      font-family: 'Red Hat Text', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      background: #ffffff;
+      color: #1a1a1a;
+    }
 
-        article {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+    h1, h2, h3 { font-family: 'Red Hat Display', sans-serif; }
 
-        h1 {
-            font-family: 'Red Hat Display', sans-serif;
-            font-weight: 900;
-            font-size: 42px;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            color: #1a1a1a;
-        }
+    .header-banner {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-        h2 {
-            font-family: 'Red Hat Display', sans-serif;
-            font-weight: 700;
-            font-size: 28px;
-            line-height: 1.3;
-            margin-top: 48px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #EE0000;
-            color: #1a1a1a;
-        }
+    .header-banner h1 {
+      font-weight: 900;
+      font-size: 2.75rem;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-        h3 {
-            font-family: 'Red Hat Display', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            line-height: 1.4;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            color: #1a1a1a;
-        }
+    .header-accent {
+      background: linear-gradient(135deg, #EE0000, #d4910a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-        .byline {
-            font-family: 'Red Hat Text', sans-serif;
-            font-weight: 500;
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+    .header-subtitle {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    }
 
-        p {
-            margin-bottom: 20px;
-        }
+    .header-meta {
+      font-size: 0.9rem;
+      color: #999;
+    }
 
-        .note {
-            background-color: #f5f8fc;
-            border-left: 4px solid #0066CC;
-            padding: 20px 24px;
-            margin: 28px 0 28px 20px;
-            font-size: 16px;
-        }
+    article {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
 
-        .note strong {
-            font-weight: 500;
-            color: #0066CC;
-        }
+    h2 {
+      font-weight: 700;
+      font-size: 1.65rem;
+      line-height: 1.3;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #EE0000;
+    }
 
-        .cta-box {
-            background-color: #fff5f5;
-            border-left: 4px solid #EE0000;
-            padding: 28px 32px;
-            margin: 48px 0;
-        }
+    p { margin-bottom: 1.25rem; }
 
-        .cta-box h3 {
-            margin-top: 0;
-            color: #EE0000;
-        }
+    .lead {
+      font-size: 1.15rem;
+      color: #333;
+      line-height: 1.8;
+    }
 
-        .cta-box a {
-            color: #EE0000;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom-color 0.2s;
-        }
+    .pullquote {
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 1.4;
+      color: #CC0000;
+      border-left: 4px solid #EE0000;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+    }
 
-        .cta-box a:hover {
-            border-bottom-color: #EE0000;
-        }
+    .callout {
+      background: #FFF5F5;
+      border-left: 4px solid #EE0000;
+      padding: 1.25rem;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+    }
 
-        footer {
-            max-width: 720px;
-            margin: 60px auto 0;
-            padding: 32px 20px;
-            border-top: 2px solid #e0e0e0;
-            font-size: 15px;
-            color: #666;
-        }
+    .callout p { margin-bottom: 0; }
 
-        footer a {
-            color: #0066CC;
-            text-decoration: none;
-            font-weight: 500;
-        }
+    .callout-dark {
+      background: #f5f5f5;
+      border-left-color: #333;
+    }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    ul { margin: 1rem 0 1.25rem 2rem; }
+    li { margin-bottom: 0.75rem; line-height: 1.75; }
 
-        .footer-links {
-            margin-bottom: 16px;
-        }
+    a { color: #CC0000; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-        .footer-links a {
-            margin-right: 20px;
-        }
+    strong { font-weight: 500; }
 
-        code {
-            background-color: #f5f5f5;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-        }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
 
-        strong {
-            font-weight: 500;
-        }
+    .proof-item {
+      background: #f8f8f8;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
+    .proof-item h4 {
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      color: #CC0000;
+    }
 
-            h2 {
-                font-size: 24px;
-            }
+    .proof-item p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 0;
+    }
 
-            article {
-                padding: 20px 10px;
-            }
+    .outcome-list {
+      list-style: none;
+      margin-left: 0;
+    }
 
-            .note {
-                margin-left: 0;
-            }
-        }
-    </style>
+    .outcome-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .outcome-list li:last-child { border-bottom: none; }
+
+    .outcome-label {
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .closing-statement {
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      text-align: center;
+      margin: 3rem 0 2rem;
+      color: #1a1a1a;
+    }
+
+    footer {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-top: 2px solid #e0e0e0;
+      text-align: center;
+    }
+
+    .footer-links {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      margin: 0 1rem;
+    }
+
+    .footer-attribution {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .header-banner h1 { font-size: 2rem; }
+      article { padding: 2rem 1.5rem; }
+      h2 { font-size: 1.4rem; }
+      .pullquote { font-size: 1.2rem; }
+      .proof-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <article>
-        <h1>Sovereign AI in One Flow: One Control Plane for Models, GPUs, Tools, and Agents</h1>
+  <header class="header-banner">
+    <h1>Sovereign AI Is Not a Feature.<br><span class="header-accent">It's Agency.</span></h1>
+    <div class="header-subtitle">Why the organizations that control their own AI infrastructure will outpace those that don't.</div>
+    <div class="header-meta">By Markell Rawls | AI Developer Advocate, Red Hat</div>
+  </header>
 
-        <div class="byline">
-            By Markell Rawls | AI Developer Advocate, Red Hat<br>
-            July 21, 2026
-        </div>
+  <article>
+    <h2>The Illusion of Control</h2>
 
-        <p>Here's a situation you've probably lived through: your AI team has one tool for model serving, another for GPU scheduling, a third for security testing, a fourth for cost tracking, and something else entirely for access control.</p>
+    <p class="lead">
+      Your team uses three vendors for AI. You've built applications on their APIs. You've integrated their models into production workflows. Your quarterly roadmap assumes these services will continue to exist, in their current form, at their current price, with their current capabilities.
+    </p>
 
-        <p>Five tools for five problems. Each one with its own CLI, its own auth system, its own way of thinking about tenants and quotas and logs. Your platform engineers are maintaining integration glue between all of them. Your security team has to audit five separate surfaces. Your finance team is manually correlating usage data from three different dashboards to figure out what AI is actually costing.</p>
+    <p>
+      Then one deprecates a model overnight. Thirty applications break. Another changes pricing mid-contract. A third gets acquired, and suddenly your inference stack depends on a company whose priorities aren't your priorities anymore.
+    </p>
 
-        <p>It's a mess.</p>
+    <p>
+      You realize something uncomfortable: <strong>you never controlled your AI infrastructure. You just rented someone else's.</strong>
+    </p>
 
-        <p>And the worst part? Every new AI capability you add — agents, fine-tuning, guardrails, whatever — brings another tool into the stack. The problem compounds.</p>
+    <p>
+      This isn't hypothetical. It happens every quarter. Frontier model providers retire endpoints, adjust rate limits, change terms of service, or simply shut down products. If your AI strategy depends on services you don't own, your AI strategy depends on decisions you can't influence.
+    </p>
 
-        <h2>One Control Plane, One Flow</h2>
+    <h2>What Sovereignty Actually Means</h2>
 
-        <p>What if you didn't have to live like that?</p>
+    <p>
+      When most people hear "sovereign AI," they think self-hosting. Run it on your own servers. Keep data in your own data center. That's part of it, but it misses the point entirely.
+    </p>
 
-        <p>What if there was ONE control plane that handled governance, isolation, transparency, safety, and sovereign AI operations — all in a single coherent flow?</p>
+    <div class="pullquote">
+      Sovereign AI is agency &mdash; the ability of your organization to make its own decisions, enforce its own rules, and implement its own policies over AI infrastructure, without external interference.
+    </div>
 
-        <p>That's what we're building with the Platform/Scale stack on OpenShift AI. Not a collection of point solutions duct-taped together. A real control plane where each capability builds on the previous one, where every piece shares the same primitives, where you configure it once and it just works.</p>
+    <p>
+      Think about what sovereignty means for a nation. A sovereign nation doesn't just occupy territory. It makes its own laws. It controls its own borders. It determines its own economic policy. It isn't beholden to another entity for the right to govern itself.
+    </p>
 
-        <p>Let me walk you through what that actually looks like.</p>
+    <p>
+      Sovereign AI is the same concept applied to your organization's AI infrastructure. It means your platform team decides which models to deploy, which teams get access, what rate limits apply, what compliance policies to enforce, and how much it costs. Not a vendor. Not a cloud provider. Not a third-party API service. <strong>You.</strong>
+    </p>
 
-        <h2>Governance: MaaS Subscriptions as the Entry Point</h2>
+    <p>
+      This is fundamentally different from self-hosting. You can self-host and still lack sovereignty &mdash; if your models come from a single vendor with restrictive licensing, if your tooling locks you into one cloud, if your inference stack can't run disconnected. Sovereignty is about the independence of your decisions, not just the location of your hardware.
+    </p>
 
-        <p>First principle: no AI consumption without governance.</p>
+    <h2>Why This Matters Now</h2>
 
-        <p>In our stack, that starts with Model-as-a-Service subscriptions. You want access to Claude or Llama or whatever? You don't just spin up a pod and start hitting endpoints. You subscribe to a tier — Free, Premium, Enterprise — and you get an API key tied to a quota.</p>
+    <p>
+      Three forces are converging that make sovereign AI infrastructure an urgent priority rather than a future aspiration.
+    </p>
 
-        <div class="note">
-            <strong>What is MaaS?</strong> Model-as-a-Service is exactly what it sounds like — models exposed as managed services with subscriptions, quotas, and SLAs. Think "you get 100K tokens/month on the Free tier, 10M on Premium, unlimited on Enterprise." It's how you productionize model access without everyone deploying their own inference stack.
-        </div>
+    <p>
+      <strong>Regulatory pressure is accelerating.</strong> The EU AI Act requires audit trails that many organizations simply cannot provide when inference happens on someone else's cloud. FIPS, FedRAMP, DORA, PCI-DSS &mdash; the regulatory alphabet is growing, and every new requirement assumes you can demonstrate control over your AI supply chain. If you're calling a vendor API, proving compliance means trusting their attestation. Sovereign infrastructure means proving it yourself, on your own systems, with your own logs.
+    </p>
 
-        <p>This is self-service, but it's governed self-service. Developers get their API keys instantly. They don't need to file a ticket or wait for procurement. But platform teams define the tiers, set the quotas, and enforce the limits. Finance knows exactly what consumption is allowed before it happens.</p>
+    <p>
+      <strong>Shadow AI is already here.</strong> The Stanford Digital Economy Lab's enterprise AI playbook found that 70 to 80% of employees using AI at work rely on tools not approved by their employer. Personal AWS accounts. Unauthorized Claude credits. Models downloaded from HuggingFace onto department desktops. When your organization can't provide fast, governed access to AI models, developers find their own way. And when they do, you lose visibility, compliance, and cost control simultaneously.
+    </p>
 
-        <p>Governance isn't a gate you walk through once. It's the foundation everything else builds on.</p>
+    <p>
+      <strong>Model deprecations create cascading failures.</strong> If 30 internal applications depend on a model version that a vendor retires, you're performing 30 emergency migrations. You're testing for behavioral regressions across every prompt chain. You're validating outputs against ground truth that may have shifted. With sovereign infrastructure, your platform team owns the model lifecycle &mdash; not the vendor's product roadmap.
+    </p>
 
-        <h2>Isolation: Multi-Tenant Boundaries That Actually Hold</h2>
+    <h2>What Sovereign AI Infrastructure Looks Like</h2>
 
-        <p>Once you have governance, you need isolation. Because if three teams are sharing one cluster, you can't have Team A's model inference spilling into Team B's GPU pool, or Team C's logs exposing Team A's prompts.</p>
+    <p>
+      Sovereign AI isn't a product you install. It's an operational model your organization adopts. The infrastructure needs to deliver specific outcomes that enable organizational agency.
+    </p>
 
-        <p>We're doing Kubernetes-native multi-tenancy the right way. Hard network policy boundaries between tenants. GPU isolation so your accelerators are dedicated to the workload that requested them. Namespace-level RBAC so nobody sees what they shouldn't.</p>
+    <ul class="outcome-list">
+      <li>
+        <span class="outcome-label">Policy governance</span>
+        Admin defines the rules for AI consumption &mdash; which teams access which models, what rate limits apply, what compliance constraints are enforced. These are your organization's rules, not vendor defaults. When a request exceeds policy, the infrastructure enforces it automatically.
+      </li>
+      <li>
+        <span class="outcome-label">Team independence</span>
+        Infrastructure boundaries ensure each team works autonomously. Isolated environments, dedicated resources, zero cross-contamination of data or workloads. Teams can move fast without stepping on each other, and the platform ensures they can't accidentally access what they shouldn't.
+      </li>
+      <li>
+        <span class="outcome-label">Cost transparency</span>
+        "What did AI cost us this quarter, by department?" should be a question you can answer in real-time, not one that requires three weeks and a spreadsheet. Token-level metering per team and per model, with full-stack visibility from API keys to GPU utilization. Platform owners get feedback on health, usage, and consumption &mdash; continuously.
+      </li>
+      <li>
+        <span class="outcome-label">Continuous safety</span>
+        Security policies enforced at the infrastructure level, not bolted on after the fact. Evaluate models before deployment. Protect against adversarial inputs in real-time. Monitor for drift continuously. A closed loop, not a one-time audit.
+      </li>
+      <li>
+        <span class="outcome-label">Supply chain control</span>
+        Verify model weights, data lineage, and software dependencies. Know exactly what's running on your infrastructure and where it came from. In air-gapped environments, this is a hard requirement. In regulated industries, it's becoming one.
+      </li>
+    </ul>
 
-        <p>This isn't soft isolation where you trust everyone to stay in their lane. This is enforced at the infrastructure level. If you're in Tenant A, you literally cannot reach Tenant B's services. The API server won't let you. The network won't route you. The scheduler won't give you their GPUs.</p>
+    <p>
+      Notice what's not on this list: specific product names, technical architectures, or implementation details. That's intentional. Sovereign AI is about what your organization can <em>do</em>, not what software it runs. The capabilities above are outcomes that enable agency &mdash; the specifics of how you get there will depend on your infrastructure, your requirements, and your existing investments.
+    </p>
 
-        <div class="note">
-            <strong>Multi-tenancy in Kubernetes:</strong> True isolation means separate namespaces, network policies that block cross-tenant traffic, resource quotas that prevent noisy neighbors, and RBAC that enforces who can do what. OpenShift adds another layer with project-level isolation and SCC (Security Context Constraints) that lockdown what containers can actually do at runtime.
-        </div>
+    <h2>The Internal AI Service Provider</h2>
 
-        <p>Why does this matter? Because without isolation, you can't safely run production AI workloads on shared infrastructure. You end up over-provisioning — one cluster per team, one GPU pool per project — and your utilization tanks. With real isolation, you can pack workloads tight and still sleep at night.</p>
+    <p>
+      The pattern emerging across organizations that take sovereignty seriously is what I call the <strong>internal AI service provider</strong>. Central IT deploys governed model endpoints. Business units consume them via self-service. The platform team operates the infrastructure. Developers get API keys and build applications.
+    </p>
 
-        <h2>Transparency: Show Me The Money</h2>
+    <p>
+      If this sounds familiar, it should. It's the same pattern enterprises adopted for databases a decade ago. Central IT runs the database platform. Application teams don't each stand up their own Postgres clusters. They request a database, get connection credentials, and build their application. The platform handles provisioning, scaling, monitoring, and compliance.
+    </p>
 
-        <p>Alright, you've got governance and isolation. Now you need visibility.</p>
+    <p>
+      Apply that same model to AI inference, and you get something powerful: every developer in the organization has access to governed AI models through a standard API, while the platform team maintains full control over security, cost, and compliance. Shadow AI disappears because there's no reason for it &mdash; the governed path is faster than the unsanctioned one.
+    </p>
 
-        <p>How many tokens did Team A use last month? What did that cost? Which models are they hitting? What use cases are driving the spend? If you can't answer those questions in real-time, you don't have a production AI platform. You have a cost center waiting to explode.</p>
+    <div class="callout-dark callout">
+      <p>This pattern works on any infrastructure. Public cloud, on-premises, air-gapped, hybrid. The sovereignty isn't in <em>where</em> it runs. It's in <em>who controls it</em>.</p>
+    </div>
 
-        <p>Our observability layer gives you per-tenant token usage, broken down by model, by use case, by time window. You want to know what Claude 3.5 Sonnet cost you in June? Done. You want to see which team is burning through Premium quota fastest? Two clicks.</p>
+    <h2>Proven at Scale</h2>
 
-        <p>And here's the kicker: it's all tied back to the MaaS subscriptions from step one. The same tenant boundaries that enforce isolation also define the observability scope. The same quotas that govern access also drive the cost attribution. It's one coherent system.</p>
+    <p>
+      This isn't theoretical. Organizations across sectors are building sovereign AI infrastructure today.
+    </p>
 
-        <p>Finance gets CSV exports for chargeback. Engineering gets Grafana dashboards for capacity planning. Leadership gets the "Show Me The Money" view that answers the one question that actually matters: what is AI costing us, and what are we getting for it?</p>
+    <div class="proof-grid">
+      <div class="proof-item">
+        <h4>Federal IT</h4>
+        <p>900 GPUs under a single sovereign AI platform. Complete data residency control with zero external cloud dependencies.</p>
+      </div>
+      <div class="proof-item">
+        <h4>Financial Services</h4>
+        <p>Regulated compliance with EU AI Act, FIPS, and PCI-DSS. Full audit trail from model deployment to inference output.</p>
+      </div>
+      <div class="proof-item">
+        <h4>Defense</h4>
+        <p>Sovereign AI in air-gapped environments. Same capabilities, zero external connectivity. Complete operational independence.</p>
+      </div>
+      <div class="proof-item">
+        <h4>Enterprise</h4>
+        <p>Internal AI service providers eliminating vendor dependence. Central IT as the AI platform, business units as consumers.</p>
+      </div>
+    </div>
 
-        <h2>Safety: Guardrails at the Gateway</h2>
+    <p>
+      A Forrester Total Economic Impact study found <strong>233% ROI</strong> for organizations adopting this approach &mdash; driven by consolidation of fragmented AI tooling, elimination of shadow AI spend, and operational efficiencies from centralized governance.
+    </p>
 
-        <p>Transparency without safety is just watching the fire burn.</p>
+    <h2>Sovereignty Is a Choice</h2>
 
-        <p>You can see all the tokens flowing through your system. You can track every API call, every model invocation, every dollar spent. But if you're not testing for vulnerabilities and blocking bad requests at runtime, you're one prompt injection away from a very bad day.</p>
+    <p>
+      There are two paths forward for enterprise AI infrastructure.
+    </p>
 
-        <p>That's where Garak and NeMo Guardrails come in.</p>
+    <p>
+      The first is to continue depending on vendors. Keep building on APIs you don't control. Keep hoping deprecation notices come with enough lead time. Keep trying to prove regulatory compliance through someone else's attestation. Keep discovering shadow AI deployments after they've already leaked data or run up unauthorized bills. This path works until it doesn't.
+    </p>
 
-        <div class="note">
-            <strong>What is Garak?</strong> Garak is an LLM vulnerability scanner. It throws hundreds of adversarial prompts at your models — jailbreaks, prompt injections, data leakage attempts — and reports what breaks. Think of it as a fuzzer for language models. You run it in staging before you ship. You run it continuously in production to catch drift.
-        </div>
+    <p>
+      The second is to build infrastructure that puts your organization in charge. Own the model lifecycle. Define your own policies. Attribute costs to the teams that incur them. Enforce security at the infrastructure level. Run the same stack on-prem, in the cloud, or air-gapped &mdash; wherever your requirements demand.
+    </p>
 
-        <p>In our flow, Garak runs against staging endpoints before anything goes live. You're deploying a new model? Fine. But it doesn't hit production until Garak gives it a clean bill of health. Found a vulnerability? Fix it, re-test, then ship.</p>
+    <p>
+      Sovereign AI is not a feature you enable in a settings panel. It's not a compliance checkbox. It's not a product tier.
+    </p>
 
-        <p>And in production, NeMo Guardrails sits at the gateway. It's not just logging requests — it's actively filtering them. Block PII. Enforce topic boundaries. Prevent jailbreaks in real-time. Your governance policies aren't just documentation. They're enforced in the request path.</p>
+    <p class="closing-statement">
+      It's a strategic position. And the organizations that take it now will be the ones still in control when everything around them changes.
+    </p>
 
-        <p>Security becomes a loop, not a checkbox. Test in staging. Monitor in production. Feed findings back into policy. Rinse and repeat.</p>
+    <div class="pullquote" style="text-align: center; border-left: none; border-top: 3px solid #EE0000; border-bottom: 3px solid #EE0000; padding: 1.5rem;">
+      Your models. Your data. Your choice.
+    </div>
+  </article>
 
-        <h2>The Full Flow: Governance → Isolation → Transparency → Safety → Sovereign AI</h2>
-
-        <p>Let's bring it all together. Here's what the full flow looks like:</p>
-
-        <p>A developer on Team A wants to build a RAG application. They subscribe to the Premium MaaS tier, get an API key, and start coding. The subscription enforces governance — they have 10M tokens/month, and when they hit that limit, the API starts returning 429s. No surprises.</p>
-
-        <p>Their workload runs in Tenant A's namespace. It can't see Team B's data. It can't consume Team C's GPUs. Isolation is automatic and enforced.</p>
-
-        <p>As they develop, platform engineers watch token usage climb on the observability dashboard. They can see it's Claude 3.5 Sonnet, hitting the embeddings endpoint, processing internal docs. Finance sees the same data in their monthly chargeback report. Transparency is real-time and multi-stakeholder.</p>
-
-        <p>Before the app goes to production, Garak runs a security sweep. Finds one prompt injection vector. Team A patches it. Garak re-tests. Clean. The app ships.</p>
-
-        <p>In production, NeMo Guardrails watches every request. If someone tries to trick the model into leaking PII, the request gets blocked. If usage spikes unexpectedly, alerts fire. Safety is continuous.</p>
-
-        <p>That's sovereign AI in one flow. Governance, isolation, transparency, and safety — all through one control plane, using one set of primitives, managed by one platform team.</p>
-
-        <h2>What Sovereign AI Operations Actually Looks Like</h2>
-
-        <p>Here's the thing: this isn't vendor lock-in disguised as a platform.</p>
-
-        <p>We're vendor-neutral where it matters. You want to swap Garak for something else? Go ahead — it's just a container running scans. You want to use a different observability backend? The metrics are in Prometheus format. Plug in Datadog, Splunk, whatever you want.</p>
-
-        <p>The control plane gives you primitives — subscriptions, quotas, tenants, policies — and those primitives work regardless of what models you're running, what tools you're using, or what cloud you're on.</p>
-
-        <p>That's what sovereign AI operations actually means. Your teams move fast because self-service is real. Your platform team sleeps well because isolation and governance are enforced. Finance gets their reports because observability is built-in. Security stays continuous because testing and guardrails are part of the flow.</p>
-
-        <p>And nobody's locked into a single vendor's walled garden.</p>
-
-        <p>You run this on OpenShift AI because OpenShift AI is the control plane. But the models can come from anywhere. The tools can be swapped. The infrastructure can be on-prem, in the cloud, or hybrid. You're in control.</p>
-
-        <p>That's the vision. One control plane. One flow. From governance to isolation to transparency to safety to sovereign AI operations.</p>
-
-        <p>We're building it. And it's working.</p>
-
-        <div class="cta-box">
-            <h3>Try It Yourself</h3>
-            <p>Want to see this in action? Check out the <a href="../demo/index.html">interactive demo</a> where you can explore governance policies, multi-tenant isolation, and per-tenant observability in real-time.</p>
-            <p>For more on the Platform/Scale pillar and sovereign AI operations, visit the <a href="../index.html">Sovereign AI in One Flow content hub</a>.</p>
-        </div>
-
-    </article>
-
-    <footer>
-        <div class="footer-links">
-            <a href="../index.html">Content Hub</a>
-            <a href="../demo/index.html">Interactive Demo</a>
-        </div>
-        <div>
-            Markell Rawls | AI Developer Advocate, Red Hat
-        </div>
-    </footer>
+  <footer>
+    <div class="footer-links">
+      <a href="../index.html">Interactive Overview</a>
+    </div>
+    <div class="footer-attribution">
+      Markell Rawls | AI Developer Advocate, Red Hat
+    </div>
+  </footer>
 </body>
 </html>
