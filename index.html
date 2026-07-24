@@ -9,24 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;900&family=Red+Hat+Text:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --card: #1a1a1a;
-      --text: #ffffff;
-      --text-secondary: #cccccc;
-      --text-muted: #999999;
-      --border: #3d3d3d;
+      --bg: #ffffff;
+      --card-glass: rgba(255, 255, 255, 0.55);
+      --card-glass-hover: rgba(255, 255, 255, 0.75);
+      --text: #1a1a1a;
+      --text-secondary: #444444;
+      --text-muted: #888888;
+      --border-glass: rgba(0, 0, 0, 0.08);
       --red: #ee0000;
-      --red-glow: rgba(238, 0, 0, 0.15);
-      --amber: #d4910a;
-      --amber-glow: rgba(212, 145, 10, 0.15);
-      --coral: #e05a3a;
-      --coral-glow: rgba(224, 90, 58, 0.15);
-      --blue: #3a7bd5;
-      --blue-glow: rgba(58, 123, 213, 0.15);
-      --green: #2e8b57;
-      --green-glow: rgba(46, 139, 87, 0.15);
-      --purple: #7b5ea7;
-      --purple-glow: rgba(123, 94, 167, 0.15);
+      --red-soft: rgba(238, 0, 0, 0.08);
+      --amber: #c47a00;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --purple: #7c3aed;
+      --coral: #dc2626;
+      --grad-red: linear-gradient(135deg, #ee0000, #cc0000, #ff3333, #ee0000);
       --font-display: 'Red Hat Display', sans-serif;
       --font-text: 'Red Hat Text', sans-serif;
     }
@@ -43,33 +40,44 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .bg-blob {
+    canvas#particles {
       position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.07;
-      pointer-events: none;
+      inset: 0;
       z-index: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
     }
 
-    .blob-1 { width: 600px; height: 600px; background: radial-gradient(circle, #ee0000, #cc0000); top: -200px; left: -200px; animation: bf1 26s ease-in-out infinite; }
-    .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, #d4910a, #b87a08); bottom: -150px; right: -150px; animation: bf2 30s ease-in-out infinite; }
-    .blob-3 { width: 450px; height: 450px; background: radial-gradient(circle, #3a7bd5, #2a5ba5); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: bf3 22s ease-in-out infinite; }
-    .blob-4 { width: 400px; height: 400px; background: radial-gradient(circle, #7b5ea7, #5b3e87); bottom: 10%; left: 10%; animation: bf4 28s ease-in-out infinite; }
-
-    @keyframes bf1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(100px, 150px) scale(1.1); } }
-    @keyframes bf2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-80px, -120px) scale(1.15); } }
-    @keyframes bf3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(calc(-50% + 60px), calc(-50% - 80px)) scale(1.2); } }
-    @keyframes bf4 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(120px, -100px) scale(1.1); } }
+    @keyframes gradSweep {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     .progress-bar {
       position: fixed;
       top: 0;
       left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--red), var(--amber), var(--blue), var(--green));
+      height: 3px;
+      background: var(--grad-red);
+      background-size: 220% 220%;
+      animation: gradSweep 8s ease-in-out infinite;
       transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1000;
+      z-index: 100;
+    }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 28px;
+      right: 32px;
+      z-index: 100;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      user-select: none;
     }
 
     .slide-container { position: relative; width: 100%; height: 100vh; overflow: hidden; z-index: 1; }
@@ -81,7 +89,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 60px;
+      padding: 60px 60px 80px;
       position: relative;
     }
 
@@ -102,7 +110,13 @@
       font-size: 56px;
       line-height: 1.1;
       margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+      color: var(--text);
+    }
+
+    .slide-title .accent {
+      background: var(--grad-red);
+      background-size: 220% 220%;
+      animation: gradSweep 8s ease-in-out infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -132,25 +146,69 @@
     .slide.active .anim-d5 { transition-delay: 0.5s; }
     .slide.active .anim-d6 { transition-delay: 0.6s; }
     .slide.active .anim-d7 { transition-delay: 0.7s; }
-    .slide.active .anim-d8 { transition-delay: 0.8s; }
 
-    /* Slide 1: Hero canvas */
-    .hero-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      opacity: 0.5;
+    .glass {
+      background: var(--card-glass);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .glass:hover {
+      background: var(--card-glass-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-gradient {
+      background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                  var(--grad-red) border-box;
+      background-size: auto, 220% 220%;
+      animation: gradSweep 8s ease-in-out infinite;
+      border: 1.5px solid transparent;
+      border-radius: 16px;
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      box-shadow: 0 8px 32px rgba(238, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-gradient:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(238, 0, 0, 0.12);
+    }
+
+    /* Slide 1: Hero */
+    .hero-center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+    }
+
+    .hero-center .slide-title {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .hero-center .slide-subtitle {
+      font-size: 22px;
+      max-width: 640px;
+      text-align: center;
     }
 
     .hero-supporting {
       font-size: 17px;
       color: var(--text-muted);
-      max-width: 640px;
+      max-width: 580px;
       line-height: 1.6;
-      margin-top: 8px;
+      margin-top: 12px;
+      text-align: center;
     }
 
     /* Slide 2: Control problem */
@@ -165,9 +223,6 @@
       align-items: flex-start;
       gap: 16px;
       padding: 20px 24px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
       font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.5;
@@ -177,7 +232,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--coral-glow);
+      background: rgba(220, 38, 38, 0.08);
       border: 2px solid var(--coral);
       display: flex;
       align-items: center;
@@ -198,18 +253,9 @@
     }
 
     .outcome-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 28px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .outcome-card:hover {
-      border-color: rgba(238, 0, 0, 0.4);
-      transform: translateY(-4px);
     }
 
     .outcome-card::before {
@@ -219,11 +265,8 @@
       left: 0;
       right: 0;
       height: 3px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      border-radius: 16px 16px 0 0;
     }
-
-    .outcome-card:hover::before { opacity: 1; }
 
     .outcome-card:nth-child(1)::before { background: var(--amber); }
     .outcome-card:nth-child(2)::before { background: var(--blue); }
@@ -241,16 +284,17 @@
       margin-bottom: 16px;
     }
 
-    .outcome-card:nth-child(1) .outcome-icon { background: var(--amber-glow); }
-    .outcome-card:nth-child(2) .outcome-icon { background: var(--blue-glow); }
-    .outcome-card:nth-child(3) .outcome-icon { background: var(--green-glow); }
-    .outcome-card:nth-child(4) .outcome-icon { background: var(--purple-glow); }
+    .outcome-card:nth-child(1) .outcome-icon { background: rgba(196, 122, 0, 0.1); }
+    .outcome-card:nth-child(2) .outcome-icon { background: rgba(37, 99, 235, 0.1); }
+    .outcome-card:nth-child(3) .outcome-icon { background: rgba(22, 163, 74, 0.1); }
+    .outcome-card:nth-child(4) .outcome-icon { background: rgba(124, 58, 237, 0.1); }
 
     .outcome-title {
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 20px;
       margin-bottom: 8px;
+      color: var(--text);
     }
 
     .outcome-text {
@@ -276,9 +320,6 @@
     }
 
     .proof-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 28px;
       position: relative;
       overflow: hidden;
@@ -291,6 +332,7 @@
       left: 0;
       width: 4px;
       height: 100%;
+      border-radius: 16px 0 0 16px;
     }
 
     .proof-card:nth-child(1)::before { background: var(--blue); }
@@ -322,16 +364,15 @@
       margin-top: 20px;
       text-align: center;
       padding: 20px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
     }
 
     .proof-stat-value {
       font-family: var(--font-display);
       font-weight: 900;
       font-size: 48px;
-      background: linear-gradient(135deg, var(--amber), var(--coral));
+      background: var(--grad-red);
+      background-size: 220% 220%;
+      animation: gradSweep 8s ease-in-out infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -354,7 +395,9 @@
     }
 
     .result-headline .accent {
-      background: linear-gradient(135deg, var(--red), var(--amber));
+      background: var(--grad-red);
+      background-size: 220% 220%;
+      animation: gradSweep 8s ease-in-out infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -384,10 +427,8 @@
     .result-badge {
       padding: 10px 20px;
       border-radius: 24px;
-      border: 1px solid var(--border);
       font-size: 14px;
       color: var(--text-secondary);
-      background: var(--card);
     }
 
     .footer {
@@ -399,7 +440,7 @@
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 18px;
-      margin-bottom: 4px;
+      color: var(--text);
     }
 
     .footer-title {
@@ -407,94 +448,36 @@
       font-size: 15px;
     }
 
-    /* Navigation */
-    .navigation {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      z-index: 1000;
-      background: rgba(26, 26, 26, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 12px 24px;
-      border-radius: 48px;
-      border: 1px solid var(--border);
-    }
-
-    .nav-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .nav-btn:hover { background: var(--border); transform: scale(1.05); }
-    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .nav-btn:disabled:hover { background: var(--card); transform: scale(1); }
-    .nav-btn svg { width: 20px; height: 20px; stroke: var(--text); fill: none; stroke-width: 2; }
-
-    .nav-dots { display: flex; gap: 10px; }
-
-    .nav-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--border);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .nav-dot.active {
-      background: var(--red);
-      width: 28px;
-      border-radius: 5px;
-    }
-
     @media (max-width: 1200px) {
       .slide-title { font-size: 44px; }
+      .hero-center .slide-title { font-size: 48px; }
       .result-headline { font-size: 48px; }
     }
 
     @media (max-width: 768px) {
-      .slide { padding: 60px 24px; }
+      .slide { padding: 60px 24px 80px; }
       .slide-title { font-size: 36px; }
+      .hero-center .slide-title { font-size: 40px; }
       .slide-subtitle { font-size: 18px; }
       .outcome-grid, .proof-grid { grid-template-columns: 1fr; }
       .result-headline { font-size: 36px; }
-      .navigation { bottom: 20px; padding: 10px 16px; gap: 16px; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
-  <div class="bg-blob blob-3"></div>
-  <div class="bg-blob blob-4"></div>
-
+  <canvas id="particles"></canvas>
   <div class="progress-bar" id="progressBar"></div>
+  <div class="slide-counter" id="slideCounter">1 / 5</div>
 
   <div class="slide-container">
     <div class="slide-track" id="slideTrack">
 
       <!-- Slide 1: Your AI, Your Rules -->
       <div class="slide active">
-        <canvas class="hero-canvas" id="heroCanvas"></canvas>
-        <div class="slide-inner">
-          <div class="slide-number anim">01</div>
-          <h2 class="slide-title anim anim-d1">Your AI, Your Rules</h2>
+        <div class="slide-inner hero-center">
+          <h2 class="slide-title anim anim-d1">Your AI, <span class="accent">Your Rules</span></h2>
           <p class="slide-subtitle anim anim-d2">Sovereign AI means your organization makes its own decisions &mdash; about models, data, access, and cost &mdash; without external interference.</p>
-          <div class="slide-body">
-            <p class="hero-supporting anim anim-d3">Like a sovereign nation makes its own laws, sovereign AI gives your organization the agency to enforce its own policies over AI infrastructure. On your terms. On your infrastructure.</p>
-          </div>
+          <p class="hero-supporting anim anim-d3">Like a sovereign nation makes its own laws, sovereign AI gives your organization the agency to enforce its own policies over AI infrastructure.</p>
         </div>
       </div>
 
@@ -502,23 +485,23 @@
       <div class="slide">
         <div class="slide-inner">
           <div class="slide-number anim">02</div>
-          <h2 class="slide-title anim anim-d1">The Control Problem</h2>
+          <h2 class="slide-title anim anim-d1">The <span class="accent">Control</span> Problem</h2>
           <p class="slide-subtitle anim anim-d2">When you depend on vendors you don't control, you lose the ability to act independently.</p>
           <div class="slide-body">
             <div class="control-list">
-              <div class="control-item anim anim-d3">
+              <div class="control-item glass anim anim-d3">
                 <div class="control-icon">!</div>
                 <span>A model deprecation breaks 30 apps overnight &mdash; and you had no say</span>
               </div>
-              <div class="control-item anim anim-d4">
+              <div class="control-item glass anim anim-d4">
                 <div class="control-icon">!</div>
                 <span>Data crosses borders you can't audit because inference happens on someone else's cloud</span>
               </div>
-              <div class="control-item anim anim-d5">
+              <div class="control-item glass anim anim-d5">
                 <div class="control-icon">!</div>
                 <span>Shadow AI proliferates because getting approved access takes too long</span>
               </div>
-              <div class="control-item anim anim-d6">
+              <div class="control-item glass anim anim-d6">
                 <div class="control-icon">!</div>
                 <span>You can't answer "what did AI cost us?" because you don't own the stack</span>
               </div>
@@ -531,26 +514,26 @@
       <div class="slide">
         <div class="slide-inner">
           <div class="slide-number anim">03</div>
-          <h2 class="slide-title anim anim-d1">Take Control of Your AI</h2>
+          <h2 class="slide-title anim anim-d1">Take Control of <span class="accent">Your AI</span></h2>
           <p class="slide-subtitle anim anim-d2">Empower your infrastructure to take control of your AI.</p>
           <div class="slide-body">
             <div class="outcome-grid">
-              <div class="outcome-card anim anim-d3">
+              <div class="outcome-card glass anim anim-d3">
                 <div class="outcome-icon">&#9878;</div>
                 <div class="outcome-title">Governed Model Access</div>
                 <div class="outcome-text">Hosting intelligent inference lets platform owners apply policy governance. Admin defines the rules &mdash; not the vendor.</div>
               </div>
-              <div class="outcome-card anim anim-d4">
+              <div class="outcome-card glass anim anim-d4">
                 <div class="outcome-icon">&#9881;</div>
                 <div class="outcome-title">Team Independence</div>
                 <div class="outcome-text">Infrastructure boundaries ensure each team works autonomously. Isolated environments, dedicated resources, zero cross-contamination.</div>
               </div>
-              <div class="outcome-card anim anim-d5">
+              <div class="outcome-card glass anim anim-d5">
                 <div class="outcome-icon">&#9783;</div>
                 <div class="outcome-title">Full Cost Visibility</div>
                 <div class="outcome-text">Platform owners get real-time feedback on health, usage, and consumption. "What did AI cost us this quarter?" &mdash; answered instantly.</div>
               </div>
-              <div class="outcome-card anim anim-d6">
+              <div class="outcome-card glass anim anim-d6">
                 <div class="outcome-icon">&#9888;</div>
                 <div class="outcome-title">Continuous Safety</div>
                 <div class="outcome-text">Security policies enforced at the infrastructure level. Evaluate, protect, monitor &mdash; a continuous loop, not a one-time scan.</div>
@@ -565,28 +548,28 @@
       <div class="slide">
         <div class="slide-inner">
           <div class="slide-number anim">04</div>
-          <h2 class="slide-title anim anim-d1">Proven at Scale</h2>
+          <h2 class="slide-title anim anim-d1">Proven at <span class="accent">Scale</span></h2>
           <p class="slide-subtitle anim anim-d2">Organizations worldwide are building sovereign AI infrastructure.</p>
           <div class="slide-body">
             <div class="proof-grid">
-              <div class="proof-card anim anim-d3">
+              <div class="proof-card glass anim anim-d3">
                 <div class="proof-sector">Federal IT</div>
                 <div class="proof-text">900 GPUs under a single sovereign AI platform. Complete data residency control. No external cloud dependencies.</div>
               </div>
-              <div class="proof-card anim anim-d4">
+              <div class="proof-card glass anim anim-d4">
                 <div class="proof-sector">Financial Services</div>
                 <div class="proof-text">Regulated compliance with EU AI Act, FIPS, and PCI-DSS requirements. Full audit trail from model to output.</div>
               </div>
-              <div class="proof-card anim anim-d5">
+              <div class="proof-card glass anim anim-d5">
                 <div class="proof-sector">Defense</div>
                 <div class="proof-text">Sovereign AI in air-gapped environments. Same capabilities, zero external connectivity. Complete operational independence.</div>
               </div>
-              <div class="proof-card anim anim-d6">
+              <div class="proof-card glass anim anim-d6">
                 <div class="proof-sector">Enterprise</div>
                 <div class="proof-text">Internal AI service providers eliminating vendor dependence. Central IT as the AI provider, business units as consumers.</div>
               </div>
             </div>
-            <div class="proof-stat anim anim-d7">
+            <div class="proof-stat glass-gradient anim anim-d7">
               <div class="proof-stat-value">233%</div>
               <div class="proof-stat-label">ROI &mdash; Forrester Total Economic Impact Study</div>
             </div>
@@ -606,10 +589,10 @@
             </div>
             <p class="result-text anim anim-d2">Sovereign AI Operations means your organization is in control. Same capabilities on-prem, in the cloud, or air-gapped. No vendor lock-in. No external dependencies.</p>
             <div class="result-badges anim anim-d3">
-              <span class="result-badge">On-Premise</span>
-              <span class="result-badge">Public Cloud</span>
-              <span class="result-badge">Air-Gapped</span>
-              <span class="result-badge">Hybrid</span>
+              <span class="result-badge glass">On-Premise</span>
+              <span class="result-badge glass">Public Cloud</span>
+              <span class="result-badge glass">Air-Gapped</span>
+              <span class="result-badge glass">Hybrid</span>
             </div>
           </div>
           <div class="footer anim anim-d4">
@@ -622,126 +605,236 @@
     </div>
   </div>
 
-  <div class="navigation">
-    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <div class="nav-dots" id="navDots"></div>
-    <button class="nav-btn" id="nextBtn" aria-label="Next slide">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-  </div>
-
   <script>
+    // --- Particle System ---
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W, H, dpr;
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Red Hat fedora shape as normalized path points (0-1 range)
+    const fedoraPoints = [];
+    (function buildFedora() {
+      // Brim - wide sweeping curve
+      for (let i = 0; i <= 30; i++) {
+        const t = i / 30;
+        const x = 0.15 + t * 0.7;
+        const y = 0.62 + Math.sin(t * Math.PI) * -0.04;
+        fedoraPoints.push([x, y]);
+      }
+      // Crown left rise
+      for (let i = 0; i <= 10; i++) {
+        const t = i / 10;
+        const x = 0.28 - t * 0.02;
+        const y = 0.62 - t * 0.2;
+        fedoraPoints.push([x, y]);
+      }
+      // Crown top curve
+      for (let i = 0; i <= 20; i++) {
+        const t = i / 20;
+        const x = 0.26 + t * 0.38;
+        const y = 0.42 - Math.sin(t * Math.PI) * 0.1;
+        fedoraPoints.push([x, y]);
+      }
+      // Crown right descent
+      for (let i = 0; i <= 10; i++) {
+        const t = i / 10;
+        const x = 0.64 + t * 0.04;
+        const y = 0.42 + t * 0.2;
+        fedoraPoints.push([x, y]);
+      }
+      // Band line
+      for (let i = 0; i <= 15; i++) {
+        const t = i / 15;
+        const x = 0.27 + t * 0.41;
+        const y = 0.58;
+        fedoraPoints.push([x, y]);
+      }
+      // Fill interior
+      for (let i = 0; i < 40; i++) {
+        const x = 0.28 + Math.random() * 0.36;
+        const y = 0.38 + Math.random() * 0.22;
+        if (y < 0.62 - (Math.abs(x - 0.45) * 0.3)) {
+          fedoraPoints.push([x, y]);
+        }
+      }
+    })();
+
+    class Particle {
+      constructor(targetX, targetY, isHero) {
+        this.targetX = targetX;
+        this.targetY = targetY;
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.isHero = isHero;
+        this.r = isHero ? 2.5 + Math.random() * 2 : 1.5 + Math.random() * 1.5;
+        this.alpha = isHero ? 0.5 + Math.random() * 0.4 : 0.15 + Math.random() * 0.2;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.phase = Math.random() * Math.PI * 2;
+      }
+
+      update(t, formHat) {
+        if (formHat && this.isHero) {
+          const tx = this.targetX + Math.sin(t * 0.5 + this.phase) * 4;
+          const ty = this.targetY + Math.cos(t * 0.7 + this.phase) * 3;
+          this.x += (tx - this.x) * 0.03;
+          this.y += (ty - this.y) * 0.03;
+        } else {
+          this.x += this.vx + Math.sin(t * 0.3 + this.phase) * 0.2;
+          this.y += this.vy + Math.cos(t * 0.4 + this.phase) * 0.2;
+          if (this.x < 0 || this.x > W) this.vx *= -1;
+          if (this.y < 0 || this.y > H) this.vy *= -1;
+          this.x = Math.max(0, Math.min(W, this.x));
+          this.y = Math.max(0, Math.min(H, this.y));
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(238, 0, 0, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    // Hero particles (form fedora)
+    const heroParticles = fedoraPoints.map(([nx, ny]) => {
+      const cx = W * 0.5, cy = H * 0.45;
+      const scale = Math.min(W, H) * 0.8;
+      const tx = cx + (nx - 0.5) * scale;
+      const ty = cy + (ny - 0.5) * scale;
+      return new Particle(tx, ty, true);
+    });
+
+    // Ambient particles
+    const ambientParticles = [];
+    for (let i = 0; i < 60; i++) {
+      const p = new Particle(0, 0, false);
+      p.x = Math.random() * W;
+      p.y = Math.random() * H;
+      p.vx = (Math.random() - 0.5) * 0.8;
+      p.vy = (Math.random() - 0.5) * 0.8;
+      ambientParticles.push(p);
+    }
+
+    let globalAngle = 0;
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, W, H);
+      const t = performance.now() / 1000;
+      const isHeroSlide = currentSlide === 0;
+
+      if (isHeroSlide) {
+        globalAngle = Math.sin(t * 0.3) * 0.05;
+        ctx.save();
+        ctx.translate(W / 2, H * 0.45);
+        ctx.rotate(globalAngle);
+        ctx.translate(-W / 2, -H * 0.45);
+      }
+
+      heroParticles.forEach(p => {
+        p.update(t, isHeroSlide);
+        if (isHeroSlide) {
+          p.alpha = 0.5 + Math.sin(t + p.phase) * 0.15;
+          p.draw();
+        }
+      });
+
+      if (isHeroSlide) {
+        for (let i = 0; i < heroParticles.length; i++) {
+          for (let j = i + 1; j < heroParticles.length; j++) {
+            const dx = heroParticles[i].x - heroParticles[j].x;
+            const dy = heroParticles[i].y - heroParticles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 50) {
+              ctx.beginPath();
+              ctx.moveTo(heroParticles[i].x, heroParticles[i].y);
+              ctx.lineTo(heroParticles[j].x, heroParticles[j].y);
+              ctx.strokeStyle = `rgba(238, 0, 0, ${0.12 * (1 - dist / 50)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.restore();
+      }
+
+      ambientParticles.forEach(p => {
+        p.update(t, false);
+        p.alpha = isHeroSlide ? 0.06 : 0.1 + Math.sin(t * 0.5 + p.phase) * 0.05;
+        p.draw();
+      });
+
+      if (!isHeroSlide) {
+        for (let i = 0; i < ambientParticles.length; i++) {
+          for (let j = i + 1; j < ambientParticles.length; j++) {
+            const dx = ambientParticles[i].x - ambientParticles[j].x;
+            const dy = ambientParticles[i].y - ambientParticles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+              ctx.beginPath();
+              ctx.moveTo(ambientParticles[i].x, ambientParticles[i].y);
+              ctx.lineTo(ambientParticles[j].x, ambientParticles[j].y);
+              ctx.strokeStyle = `rgba(238, 0, 0, ${0.04 * (1 - dist / 100)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+
+    // --- Slide Navigation ---
     let currentSlide = 0;
     const totalSlides = 5;
     const slides = document.querySelectorAll('.slide');
     const slideTrack = document.getElementById('slideTrack');
     const progressBar = document.getElementById('progressBar');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const navDots = document.getElementById('navDots');
+    const slideCounter = document.getElementById('slideCounter');
 
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goToSlide(i));
-      navDots.appendChild(dot);
-    }
-
-    function goToSlide(index) {
-      if (index < 0 || index >= totalSlides) return;
-      currentSlide = index;
+    function updateSlide() {
       slideTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
       progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
-
+      slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
       slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
-      document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-
-      prevBtn.disabled = currentSlide === 0;
-      nextBtn.disabled = currentSlide === totalSlides - 1;
     }
 
-    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToSlide(currentSlide + 1);
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goToSlide(currentSlide - 1);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        prevSlide();
+      }
     });
 
-    // Hero canvas: slow convergence animation
-    (function() {
-      const canvas = document.getElementById('heroCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const dpr = window.devicePixelRatio || 1;
-
-      function resize() {
-        canvas.width = canvas.offsetWidth * dpr;
-        canvas.height = canvas.offsetHeight * dpr;
-        ctx.scale(dpr, dpr);
-      }
-      resize();
-      window.addEventListener('resize', () => {
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        resize();
-      });
-
-      const w = () => canvas.offsetWidth;
-      const h = () => canvas.offsetHeight;
-
-      const particles = [];
-      for (let i = 0; i < 60; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 200 + Math.random() * 400;
-        particles.push({
-          angle,
-          dist,
-          x: 0, y: 0,
-          speed: 0.0005 + Math.random() * 0.001,
-          size: 2 + Math.random() * 3,
-          alpha: 0.2 + Math.random() * 0.4,
-          color: ['#ee0000', '#d4910a', '#3a7bd5', '#2e8b57', '#7b5ea7'][Math.floor(Math.random() * 5)]
-        });
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, w(), h());
-        const cx = w() * 0.75;
-        const cy = h() * 0.5;
-
-        particles.forEach(p => {
-          p.angle += p.speed;
-          p.x = cx + Math.cos(p.angle) * p.dist;
-          p.y = cy + Math.sin(p.angle) * p.dist * 0.5;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = p.color.replace(')', `, ${p.alpha})`).replace('rgb', 'rgba').replace('#', '');
-
-          const r = parseInt(p.color.slice(1,3), 16);
-          const g = parseInt(p.color.slice(3,5), 16);
-          const b = parseInt(p.color.slice(5,7), 16);
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`;
-          ctx.fill();
-        });
-
-        const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80);
-        grd.addColorStop(0, 'rgba(238, 0, 0, 0.15)');
-        grd.addColorStop(1, 'rgba(238, 0, 0, 0)');
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 80, 0, Math.PI * 2);
-        ctx.fill();
-
-        requestAnimationFrame(draw);
-      }
-
-      draw();
-    })();
-
-    goToSlide(0);
+    updateSlide();
   </script>
 </body>
 </html>
