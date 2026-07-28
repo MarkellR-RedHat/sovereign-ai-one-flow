@@ -25,13 +25,13 @@
       top: 24px;
       right: 32px;
       z-index: 101;
-      height: 36px;
+      height: clamp(28px, 3vw, 40px);
     }
 
     .header-banner {
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       color: white;
-      padding: 4rem 2rem;
+      padding: 4rem 2rem 2rem;
       text-align: center;
     }
 
@@ -39,7 +39,7 @@
       font-weight: 900;
       font-size: 2.5rem;
       line-height: 1.15;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
       max-width: 760px;
       margin-left: auto;
       margin-right: auto;
@@ -53,10 +53,10 @@
     }
 
     .header-subtitle {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #ccc;
       max-width: 620px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 0.75rem;
       line-height: 1.6;
     }
 
@@ -68,17 +68,92 @@
     .header-meta a { color: #d4910a; text-decoration: none; }
     .header-meta a:hover { text-decoration: underline; }
 
-    article {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: #f4f4f4;
+      border-bottom: 2px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    h2 {
+    .tab-btn {
+      font-family: 'Red Hat Text', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: #1a1a1a; background: #eaeaea; }
+
+    .tab-btn.active {
+      color: #1a1a1a;
+      border-bottom-color: #EE0000;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .tab-panel {
+      display: none;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    .tab-panel.active { display: block; }
+
+    .idea-header { margin-bottom: 2rem; }
+
+    .idea-label {
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 900;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #CC0000;
+      margin-bottom: 0.5rem;
+    }
+
+    .idea-title {
       font-weight: 700;
       font-size: 1.65rem;
       line-height: 1.3;
-      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .idea-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .meta-tag {
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      background: #f4f4f4;
+      color: #555;
+    }
+
+    .idea-intro { color: #333; }
+    .idea-intro p { margin-bottom: 1rem; }
+
+    h2 {
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 1.3;
+      margin-top: 2.25rem;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
       border-bottom: 3px solid #EE0000;
@@ -89,59 +164,22 @@
     a { color: #CC0000; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .context-box {
-      background: #f8f8f8;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .context-box h3 {
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #CC0000;
-      margin-bottom: 0.75rem;
-    }
-
-    .context-box p { margin-bottom: 0.75rem; font-size: 0.95rem; color: #555; }
-    .context-box p:last-child { margin-bottom: 0; }
-
-    .key-concepts {
-      list-style: none;
-      margin: 0.75rem 0 0;
-    }
-
-    .key-concepts li {
-      padding: 0.35rem 0;
-      font-size: 0.95rem;
-      color: #555;
-      padding-left: 1.25rem;
-      position: relative;
-    }
-
-    .key-concepts li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.85rem;
-      width: 6px;
-      height: 6px;
-      background: #CC0000;
-      border-radius: 50%;
-    }
-
     .module-card {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
+      background: linear-gradient(160deg, #ffffff, #fff0f0, #ffffff, #ffe0e0, #ffffff, #fff0f0, #ffffff);
+      background-size: 220% 220%;
+      border: none;
       border-radius: 8px;
       padding: 1.75rem;
-      margin-bottom: 1.5rem;
-      transition: border-color 0.2s;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 20px rgba(238, 0, 0, 0.06);
+      animation: gradSweep 8s ease-in-out infinite;
     }
 
-    .module-card:hover { border-color: #CC0000; }
+    @keyframes gradSweep {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
     .module-header {
       display: flex;
@@ -163,7 +201,7 @@
     .module-title {
       font-family: 'Red Hat Display', sans-serif;
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       line-height: 1.3;
     }
 
@@ -174,9 +212,7 @@
       font-style: italic;
     }
 
-    .module-steps {
-      margin: 0 0 1rem 1.5rem;
-    }
+    .module-steps { margin: 0 0 1rem 1.5rem; }
 
     .module-steps li {
       margin-bottom: 0.5rem;
@@ -185,7 +221,7 @@
     }
 
     .module-takeaway {
-      background: #FFF5F5;
+      background: rgba(238, 0, 0, 0.04);
       border-left: 3px solid #EE0000;
       padding: 0.75rem 1rem;
       font-size: 0.95rem;
@@ -193,56 +229,6 @@
     }
 
     .module-takeaway strong { color: #CC0000; }
-
-    .flow-diagram {
-      background: #f8f8f8;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      text-align: center;
-    }
-
-    .flow-steps {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .flow-step {
-      background: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .flow-arrow { color: #CC0000; font-weight: 700; font-size: 1.1rem; }
-
-    .flow-note {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 0.75rem;
-    }
-
-    .tech-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin: 1rem 0 1.5rem;
-    }
-
-    .tech-item {
-      background: #f8f8f8;
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      font-size: 0.9rem;
-    }
-
-    .tech-item strong { display: block; font-size: 0.85rem; color: #CC0000; margin-bottom: 0.25rem; }
 
     .notes-section {
       background: #f0faf5;
@@ -260,9 +246,7 @@
       margin-bottom: 1rem;
     }
 
-    .notes-section ul {
-      margin: 0 0 0 1.25rem;
-    }
+    .notes-section ul { margin: 0 0 0 1.25rem; }
 
     .notes-section li {
       margin-bottom: 0.75rem;
@@ -270,8 +254,30 @@
       color: #444;
     }
 
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .tech-item {
+      background: linear-gradient(160deg, #ffffff, #fff0f0, #ffffff);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 10px rgba(238, 0, 0, 0.04);
+    }
+
+    .tech-item strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #CC0000;
+      margin-bottom: 0.25rem;
+    }
+
     footer {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 2rem;
       border-top: 2px solid #e0e0e0;
@@ -288,11 +294,11 @@
 
     @media (max-width: 768px) {
       .header-banner h1 { font-size: 1.85rem; }
-      article { padding: 2rem 1.5rem; }
-      h2 { font-size: 1.4rem; }
+      .tab-btn { padding: 0.75rem 0.75rem; font-size: 0.85rem; }
+      .tab-panel { padding: 2rem 1.5rem; }
+      h2 { font-size: 1.25rem; }
       .tech-grid { grid-template-columns: 1fr; }
-      .flow-steps { flex-direction: column; }
-      .flow-arrow { transform: rotate(90deg); }
+      .idea-meta { gap: 0.5rem; }
     }
   </style>
 </head>
@@ -301,25 +307,34 @@
 
   <header class="header-banner">
     <h1>Arcade Ideas:<br><span class="header-accent">Sovereign AI Multi-Tenancy</span></h1>
-    <div class="header-subtitle">Ideas for turning the multi-tenancy blog into a 6-module interactive arcade on OpenShift AI.</div>
-    <div class="header-meta">Source Blog: <a href="#">"Sovereign AI Needs a Tenancy Model, Not Just a Data Center"</a> by Myriam Fentanes Gutierrez / Lindani Pihri</div>
+    <div class="header-subtitle">Four ways to turn the multi-tenancy blog into an interactive arcade. Click through each idea and pick what works.</div>
+    <div class="header-meta">Source: <a href="#">"Sovereign AI Needs a Tenancy Model, Not Just a Data Center"</a> by Myriam Fentanes Gutierrez / Lindani Phiri</div>
   </header>
 
-  <article>
-    <div class="context-box">
-      <h3>Blog Summary</h3>
-      <p>The blog argues that sovereign AI is not just about putting servers in-country. It is about <strong>isolation</strong>, <strong>governance</strong>, and <strong>reversibility</strong> -- the ability to leave without breaking operations.</p>
-      <ul class="key-concepts">
-        <li>Sovereignty = cyber resilience + data safeguarding + reversibility</li>
-        <li>Namespaces alone are weak boundaries between distrusting tenants</li>
-        <li>Hosted control planes = strong isolation without 3x control plane node cost</li>
-        <li>RHOAI on hosted/virtualized clusters = each tenant gets their own AI platform</li>
-        <li>GPU isolation (MIG, vGPU, time-slicing) is the remaining hard problem</li>
-        <li>Confidential computing closes the "data in use" gap</li>
-      </ul>
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="full-story">The Full Story</button>
+    <button class="tab-btn" data-tab="before-after">Before / After</button>
+    <button class="tab-btn" data-tab="pick-role">Pick Your Role</button>
+    <button class="tab-btn" data-tab="just-show-me">Just Show Me</button>
+  </nav>
+
+  <!-- TAB 1: The Full Story -->
+  <section class="tab-panel active" id="full-story">
+    <div class="idea-header">
+      <div class="idea-label">Idea 1</div>
+      <h1 class="idea-title">The Full Story</h1>
+      <div class="idea-meta">
+        <span class="meta-tag">6 Modules</span>
+        <span class="meta-tag">45-60 min</span>
+        <span class="meta-tag">Workshop / Deep-Dive Lab</span>
+      </div>
+      <div class="idea-intro">
+        <p>This is the big one. Six modules that walk through the entire argument from your blog, start to finish. You open with why namespace isolation isn't enough for sovereign AI, build up to hosted control planes and RHOAI deployment, tackle the GPU problem honestly, prove it to an auditor, and close with the reversibility test.</p>
+        <p>The narrative follows your blog's arc pretty closely. Each module has hands-on steps so whoever is going through it is actually doing things, not just reading slides. The whole thing builds on itself, each module picks up where the last one left off.</p>
+      </div>
     </div>
 
-    <h2>Arcade Modules</h2>
+    <h2>Modules</h2>
 
     <div class="module-card">
       <div class="module-header">
@@ -328,13 +343,13 @@
       </div>
       <p class="module-goal">Show why namespace isolation alone is not sufficient for sovereign AI</p>
       <ol class="module-steps">
-        <li>Start with a shared OpenShift cluster, two namespaces (tenant-a, tenant-b)</li>
-        <li>Deploy a simple inference workload in each namespace</li>
-        <li>Show that both tenants share the same API server, same etcd, same kernel</li>
-        <li>Demonstrate a scenario where tenant-a's noisy workload (GPU memory pressure, burst inference) degrades tenant-b's performance</li>
-        <li>Highlight: "This is what an auditor sees -- logically separated, physically shared"</li>
+        <li>Start with a shared OpenShift cluster. Two namespaces, tenant-a and tenant-b.</li>
+        <li>Deploy an inference workload in each namespace.</li>
+        <li>Show that both tenants share the same API server, same etcd, same kernel.</li>
+        <li>Hit tenant-a with a GPU burst (noisy inference load) and watch tenant-b's latency spike.</li>
+        <li>That's what an auditor sees. Logically separated, physically shared.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> Namespaces are fine for cooperating teams, not for distrusting tenants like a ministry, bank, and hospital on the same platform.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Namespaces are fine for cooperating teams. They are not fine for a ministry, a bank, and a hospital sharing the same platform.</div>
     </div>
 
     <div class="module-card">
@@ -344,120 +359,326 @@
       </div>
       <p class="module-goal">Show how hosted control planes make per-tenant clusters economically viable</p>
       <ol class="module-steps">
-        <li>Show the cost problem: 3 control plane nodes x N tenants x N environments = unsustainable</li>
-        <li>Provision a hosted control plane using HyperShift -- control plane runs as pods on the management cluster</li>
-        <li>Attach worker nodes via NodePool API</li>
-        <li>Pair with OpenShift Virtualization -- workers run as VMs</li>
-        <li>Compare resource footprint: traditional 3-node control plane vs hosted control plane</li>
-        <li>Show that each tenant still gets their own API server, etcd, and upgrade cadence</li>
+        <li>Show the cost problem: 3 control plane nodes x N tenants x N environments. That's unsustainable.</li>
+        <li>Provision a hosted control plane using HyperShift. Control plane runs as pods on the management cluster.</li>
+        <li>Attach worker nodes via the NodePool API.</li>
+        <li>Pair with OpenShift Virtualization so the workers run as VMs.</li>
+        <li>Compare resource footprint: traditional 3-node control plane vs hosted control plane.</li>
+        <li>Show that each tenant still gets their own API server, etcd, and upgrade cadence.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> You don't have to choose between strong isolation and cost efficiency anymore.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> You don't have to choose between strong isolation and cost efficiency anymore. That's the whole point of hosted control planes.</div>
     </div>
 
     <div class="module-card">
       <div class="module-header">
         <span class="module-number">Module 3</span>
-        <span class="module-title">Your Own AI Platform, Inside a Shared Infrastructure</span>
+        <span class="module-title">Your Own AI Platform, Inside Shared Infrastructure</span>
       </div>
       <p class="module-goal">Deploy RHOAI on a hosted cluster and show the tenant gets a full AI stack</p>
       <ol class="module-steps">
-        <li>Start from the hosted cluster created in Module 2</li>
-        <li>Install RHOAI on the tenant's hosted cluster</li>
-        <li>Walk through what the tenant now has: workbenches, pipelines, model registry, vLLM serving</li>
-        <li>Deploy a model using vLLM-based serving inside the tenant boundary</li>
-        <li>Show that this is fully isolated from other tenants on the same physical infrastructure</li>
-        <li>Run an inference request, verify it stays within the tenant's boundary</li>
+        <li>Start from the hosted cluster created in Module 2.</li>
+        <li>Install RHOAI on the tenant's hosted cluster.</li>
+        <li>Walk through what the tenant now has: workbenches, pipelines, model registry, vLLM serving.</li>
+        <li>Deploy a model using vLLM inside the tenant boundary.</li>
+        <li>Show that this is fully isolated from other tenants on the same physical infrastructure.</li>
+        <li>Run an inference request. Verify it stays within the tenant's boundary.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> Each tenant gets their own AI platform -- not a shared namespace, a real cluster with a real AI stack.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Each tenant gets their own AI platform. Not a shared namespace. A real cluster with a real AI stack.</div>
     </div>
 
     <div class="module-card">
       <div class="module-header">
         <span class="module-number">Module 4</span>
-        <span class="module-title">The GPU Challenge -- Slicing Accelerators Across Tenants</span>
+        <span class="module-title">The GPU Challenge</span>
       </div>
-      <p class="module-goal">Explore the tradeoffs of GPU multi-tenancy isolation</p>
+      <p class="module-goal">Be honest about GPU isolation tradeoffs</p>
       <ol class="module-steps">
-        <li>Show a node with GPUs shared across tenants</li>
-        <li>Demonstrate three approaches side by side:
+        <li>Show a node with GPUs shared across tenants.</li>
+        <li>Walk through three approaches side by side:
           <ul style="margin-top:0.5rem">
             <li><strong>MIG (Multi-Instance GPU):</strong> Strongest isolation, fixed partitioning, less flexibility</li>
             <li><strong>vGPU:</strong> Mediated sharing, moderate isolation</li>
             <li><strong>Time-slicing:</strong> Weakest isolation, best utilization</li>
           </ul>
         </li>
-        <li>For each: show the isolation strength, utilization efficiency, and operational complexity tradeoff</li>
-        <li>Attach a GPU to a hosted cluster nodepool (the 3.5 preview capability)</li>
-        <li>Run inference on the isolated GPU partition</li>
+        <li>For each one, show the isolation strength, utilization efficiency, and operational complexity tradeoff.</li>
+        <li>Attach a GPU to a hosted cluster nodepool (the 3.5 preview capability).</li>
+        <li>Run inference on the isolated GPU partition.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> There is no free lunch with GPU isolation -- but the platform composes multiple primitives to find the right balance.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> There is no free lunch with GPU isolation. GPUs were not designed as multi-tenant security devices. But the platform composes multiple primitives to find the right balance for your situation.</div>
     </div>
 
     <div class="module-card">
       <div class="module-header">
         <span class="module-number">Module 5</span>
-        <span class="module-title">Proving It to the Auditor -- Policy-as-Code</span>
+        <span class="module-title">Proving It to the Auditor</span>
       </div>
-      <p class="module-goal">Use Advanced Cluster Management (ACM) to enforce and audit multi-tenancy policies</p>
+      <p class="module-goal">Use ACM to enforce and audit multi-tenancy policies</p>
       <ol class="module-steps">
-        <li>Define governance policies: data residency, network isolation, resource quotas, tenant separation</li>
-        <li>Apply policies across a fleet of hosted clusters using ACM</li>
-        <li>Intentionally violate a policy (e.g., try to route traffic across tenant boundaries)</li>
-        <li>Show ACM flagging the violation in real time</li>
-        <li>Generate a compliance report showing all tenants meet the stated posture</li>
+        <li>Define governance policies: data residency, network isolation, resource quotas, tenant separation.</li>
+        <li>Apply policies across a fleet of hosted clusters using Advanced Cluster Management.</li>
+        <li>Intentionally violate a policy. Try to route traffic across tenant boundaries.</li>
+        <li>Show ACM flagging the violation in real time.</li>
+        <li>Generate a compliance report showing all tenants meet the stated posture.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> Sovereignty is not just architecture -- it is auditable, enforceable policy. ACM makes the claim provable.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Sovereignty isn't just architecture. It's auditable, enforceable policy. ACM makes the claim provable.</div>
     </div>
 
     <div class="module-card">
       <div class="module-header">
-        <span class="module-number">Module 6 (Bonus)</span>
+        <span class="module-number">Module 6</span>
         <span class="module-title">The Reversibility Test</span>
       </div>
-      <p class="module-goal">Prove that the tenant can actually leave -- the exit plan works</p>
+      <p class="module-goal">Prove the tenant can actually leave</p>
       <ol class="module-steps">
-        <li>Export the tenant's models from the model registry</li>
-        <li>Export pipeline definitions</li>
-        <li>Show that everything runs on open-source components (vLLM, KServe, etc.)</li>
-        <li>Demonstrate that the same workload could be deployed on a different OpenShift cluster (or even upstream Kubernetes)</li>
-        <li>Highlight: no proprietary lock-in, the tenant owns their stack</li>
+        <li>Export the tenant's models from the model registry.</li>
+        <li>Export pipeline definitions.</li>
+        <li>Show that everything runs on open-source components (vLLM, KServe, etc.).</li>
+        <li>Demonstrate that the same workload could be deployed on a different OpenShift cluster, or even upstream Kubernetes.</li>
+        <li>No proprietary lock-in. The tenant owns their stack.</li>
       </ol>
-      <div class="module-takeaway"><strong>Takeaway:</strong> A "sovereign" platform you can not exit is just domestic lock-in. Reversibility is the core principle.</div>
+      <div class="module-takeaway"><strong>Takeaway:</strong> A "sovereign" platform you can't exit is just domestic lock-in. Reversibility is the real test.</div>
     </div>
 
-    <h2>Suggested Arcade Flow</h2>
+    <div class="notes-section">
+      <h3>Notes for Myriam</h3>
+      <ul>
+        <li>This format is the most faithful to your blog. The narrative builds the same way: misconception, why the old answer fails, the real solution, honest caveats, and the reversibility close. If you want the arcade to feel like a hands-on version of the blog, this is the one.</li>
+        <li>Modules 4 and 6 work as standalone deep-dives or bonus tracks if 6 modules feels like too much for one sitting. The core arc is really Modules 1 through 5.</li>
+        <li>The agentic AI observability teaser at the end of your blog could be a "coming soon" slide after Module 6. Good hook for future content.</li>
+      </ul>
+    </div>
+  </section>
 
-    <p>For a single linear arcade (one cohesive experience):</p>
-
-    <div class="flow-diagram">
-      <div class="flow-steps">
-        <span class="flow-step">Module 1<br><small>The Problem</small></span>
-        <span class="flow-arrow">&rarr;</span>
-        <span class="flow-step">Module 2<br><small>Hosted Control Planes</small></span>
-        <span class="flow-arrow">&rarr;</span>
-        <span class="flow-step">Module 3<br><small>RHOAI on Top</small></span>
-        <span class="flow-arrow">&rarr;</span>
-        <span class="flow-step">Module 5<br><small>Policy Enforcement</small></span>
+  <!-- TAB 2: Before / After -->
+  <section class="tab-panel" id="before-after">
+    <div class="idea-header">
+      <div class="idea-label">Idea 2</div>
+      <h1 class="idea-title">Before / After</h1>
+      <div class="idea-meta">
+        <span class="meta-tag">2 Modules</span>
+        <span class="meta-tag">10-15 min</span>
+        <span class="meta-tag">Quick Demo / Trade Show</span>
       </div>
-      <div class="flow-note">Modules 4 and 6 work best as standalone deep-dives or bonus tracks.</div>
+      <div class="idea-intro">
+        <p>Two modules. That's it. Module 1: here's what happens when you try soft multi-tenancy for AI workloads. Shared namespace, shared API server, shared everything. One tenant's GPU burst tanks the neighbor. Module 2: here's what happens when you do it right. Hosted control plane, RHOAI on top, each tenant gets their own AI platform.</p>
+        <p>The whole point is contrast. You feel the problem, then you see the solution. No theory about what could go wrong. You watch it go wrong.</p>
+        <p>This is the version you show someone who has 10 minutes and needs to understand why this matters. If they want the full story after that, link them to the deep-dive.</p>
+      </div>
     </div>
 
-    <h2>Narrative Thread</h2>
+    <h2>Modules</h2>
 
-    <p>The blog has a strong narrative arc that the arcade should mirror:</p>
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module 1</span>
+        <span class="module-title">The Wrong Way</span>
+      </div>
+      <p class="module-goal">Make them feel the failure mode</p>
+      <ol class="module-steps">
+        <li>Shared OpenShift cluster, two namespaces, two tenants. Standard setup.</li>
+        <li>Deploy an inference workload in each namespace. Both are humming along fine.</li>
+        <li>Tenant-a gets a spike in traffic. GPU memory pressure, burst inference requests.</li>
+        <li>Watch tenant-b's response times fall apart. Their workload didn't change, but their performance did.</li>
+        <li>Show the shared components: same API server, same etcd, same kernel, same GPU node. This is what "logically separated, physically shared" actually looks like when it breaks.</li>
+        <li>Pull up what an auditor would see. Two namespaces. Looks fine on paper. Not fine in reality.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Namespaces are great for cooperating teams. For distrusting tenants running sovereign AI workloads, they are not enough. You just watched why.</div>
+    </div>
 
-    <ol style="margin: 1rem 0 1.5rem 1.5rem">
-      <li style="margin-bottom:0.75rem"><strong>Open with the misconception</strong> -- "sovereignty = data center location" (Module 1 breaks this)</li>
-      <li style="margin-bottom:0.75rem"><strong>Show why the old answer fails</strong> -- cluster-per-tenant is correct but ruinous (Module 2 solves this)</li>
-      <li style="margin-bottom:0.75rem"><strong>Make it an AI story</strong> -- RHOAI on top turns infrastructure isolation into an AI platform (Module 3)</li>
-      <li style="margin-bottom:0.75rem"><strong>Be honest about what is hard</strong> -- GPU isolation is real engineering, not a checkbox (Module 4)</li>
-      <li style="margin-bottom:0.75rem"><strong>Make it auditable</strong> -- policy-as-code with ACM (Module 5)</li>
-      <li><strong>Close with the reversibility test</strong> -- can the tenant leave? That is the real sovereignty question (Module 6)</li>
-    </ol>
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module 2</span>
+        <span class="module-title">The Right Way</span>
+      </div>
+      <p class="module-goal">Same infrastructure, real isolation, full AI stack</p>
+      <ol class="module-steps">
+        <li>Same physical infrastructure. This time, provision a hosted control plane using HyperShift.</li>
+        <li>Each tenant gets their own cluster. Own API server, own etcd. But the control plane runs as pods on the management cluster, so you're not burning 3 control plane nodes per tenant.</li>
+        <li>Install RHOAI on the tenant's hosted cluster. They now have workbenches, pipelines, model registry, vLLM serving. The full stack.</li>
+        <li>Deploy a model. Run an inference request. All within the tenant's boundary.</li>
+        <li>Hit tenant-a with the same burst from Module 1. Tenant-b doesn't flinch.</li>
+        <li>Show the compliance view: ACM policies enforced, tenant boundaries auditable, data residency verifiable.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Strong isolation without the hardware tax. Each tenant gets a full AI platform, and you can prove it to an auditor. That's the architecture your blog is proposing.</div>
+    </div>
 
-    <h2>Tech Stack</h2>
+    <div class="notes-section">
+      <h3>Notes for Myriam</h3>
+      <ul>
+        <li>This format is all about the contrast. The person going through it should feel Module 1 break and then feel Module 2 work. That emotional arc is what makes it stick.</li>
+        <li>Best fit for a booth demo, a hallway conversation at Summit, or the first thing you show someone who doesn't have context yet. It's the hook.</li>
+        <li>You could always end Module 2 with a "want the full deep-dive?" link that points to the 6-module version.</li>
+      </ul>
+    </div>
+  </section>
 
-    <div class="tech-grid">
+  <!-- TAB 3: Pick Your Role -->
+  <section class="tab-panel" id="pick-role">
+    <div class="idea-header">
+      <div class="idea-label">Idea 3</div>
+      <h1 class="idea-title">Pick Your Role</h1>
+      <div class="idea-meta">
+        <span class="meta-tag">3 Tracks</span>
+        <span class="meta-tag">15-25 min each</span>
+        <span class="meta-tag">Self-Service / RHDP Catalog</span>
+      </div>
+      <div class="idea-intro">
+        <p>Not everyone cares about the same thing. A platform admin wants to know how to build this. A tenant wants to know what they get. An auditor wants to know how to verify it.</p>
+        <p>This approach gives each persona their own 2-3 module track. They pick their role at the start and only see what's relevant to them. Same underlying infrastructure, different lens.</p>
+        <p>Your blog speaks to all three audiences. This format lets each one get exactly what they need without sitting through the parts that aren't for them.</p>
+      </div>
+    </div>
+
+    <h2>Track A: Platform Admin</h2>
+    <p>The person who builds and operates the multi-tenant infrastructure.</p>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module A-1</span>
+        <span class="module-title">Build the Foundation</span>
+      </div>
+      <p class="module-goal">Set up hosted control planes and tenant isolation</p>
+      <ol class="module-steps">
+        <li>Start from a management cluster. Provision hosted control planes using HyperShift.</li>
+        <li>Create two tenant clusters. Show the resource footprint compared to traditional 3-node control planes.</li>
+        <li>Configure node pools with OpenShift Virtualization. Workers run as VMs for stronger isolation.</li>
+        <li>Set up GPU partitioning across tenant clusters (MIG, vGPU, or time-slicing depending on the isolation requirement).</li>
+        <li>Configure network policies so tenants can't reach each other.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> You can provide each tenant with full cluster-level isolation without paying the 3x control plane cost per tenant.</div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module A-2</span>
+        <span class="module-title">Deploy the AI Stack</span>
+      </div>
+      <p class="module-goal">Install RHOAI on tenant clusters and configure fleet governance</p>
+      <ol class="module-steps">
+        <li>Install RHOAI on each tenant's hosted cluster.</li>
+        <li>Configure model serving with vLLM per tenant.</li>
+        <li>Set up ACM policies: data residency, resource quotas, tenant separation.</li>
+        <li>Apply policies across the fleet. Show that violations get flagged in real time.</li>
+        <li>Generate the compliance report an auditor would need.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> As the admin, you deploy once and govern at fleet scale. ACM turns your architecture claims into provable policy.</div>
+    </div>
+
+    <h2>Track B: Tenant</h2>
+    <p>The data scientist or ML engineer who consumes the platform.</p>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module B-1</span>
+        <span class="module-title">Your AI Platform</span>
+      </div>
+      <p class="module-goal">Show what the tenant gets and how they use it</p>
+      <ol class="module-steps">
+        <li>Log in to the RHOAI dashboard on your hosted cluster.</li>
+        <li>Tour the tools: workbenches for notebooks, pipelines for automation, model registry for versioning.</li>
+        <li>Deploy a model using vLLM. Run a few inference requests.</li>
+        <li>Show that you have your own model registry, your own pipeline server, your own serving endpoints. This isn't a shared namespace. It's yours.</li>
+        <li>Try to access tenant-b's resources. You can't. That's the point.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> From the tenant's perspective, this is their own AI platform. They don't share it and they don't have to worry about noisy neighbors.</div>
+    </div>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module B-2</span>
+        <span class="module-title">The Exit Plan</span>
+      </div>
+      <p class="module-goal">Prove portability</p>
+      <ol class="module-steps">
+        <li>Export models from the model registry.</li>
+        <li>Export pipeline definitions.</li>
+        <li>Show that everything is open source: vLLM, KServe, standard Kubernetes APIs.</li>
+        <li>Demonstrate that the same workload could run on upstream Kubernetes if needed.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> You're not locked in. Everything you built here is portable. That's what reversibility means in practice.</div>
+    </div>
+
+    <h2>Track C: Auditor / Compliance</h2>
+    <p>The person who needs to verify the claims.</p>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Module C-1</span>
+        <span class="module-title">Verify the Isolation</span>
+      </div>
+      <p class="module-goal">Prove that tenant separation is real, not just RBAC</p>
+      <ol class="module-steps">
+        <li>Start with the running multi-tenant environment.</li>
+        <li>Show what makes this different from namespace isolation: separate API servers, separate etcd, separate certificate authorities.</li>
+        <li>Attempt cross-tenant access. Network policies, RBAC, and cluster boundaries all block it.</li>
+        <li>Review the ACM compliance dashboard. Every policy, every cluster, every violation logged.</li>
+        <li>Generate the compliance report. Data residency, GPU isolation mode, network segmentation, all verifiable.</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> The isolation isn't soft. It's provable, auditable, and enforceable through policy-as-code. This is what you show the auditor.</div>
+    </div>
+
+    <div class="notes-section">
+      <h3>Notes for Myriam</h3>
+      <ul>
+        <li>This format works best if you're thinking about the RHDP catalog where people self-serve. They pick their role and get a focused experience. No one has to sit through the parts that aren't for them.</li>
+        <li>Track A (Platform Admin) is probably the primary audience based on your blog. The blog reads like it's written for the person making the architecture decision. But Track C (Auditor) is the secret weapon because that's who the platform admin needs to convince.</li>
+        <li>You could combine this with the Before/After (Idea 2) as a shared intro module before people pick their track. "Here's the problem. Now, which angle do you care about?"</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TAB 4: Just Show Me -->
+  <section class="tab-panel" id="just-show-me">
+    <div class="idea-header">
+      <div class="idea-label">Idea 4</div>
+      <h1 class="idea-title">Just Show Me</h1>
+      <div class="idea-meta">
+        <span class="meta-tag">1 Module</span>
+        <span class="meta-tag">5 min</span>
+        <span class="meta-tag">Executive Briefing / Hallway Demo</span>
+      </div>
+      <div class="idea-intro">
+        <p>One module. Provision a hosted cluster, install RHOAI, deploy Granite, run an inference request, prove tenant-b can't see tenant-a's stuff. Done.</p>
+        <p>No setup modules. No theory. No "first let's understand the problem." Just the thing working. You can always link to the full walkthrough for people who want the context.</p>
+        <p>This is the version for when someone says "I have 5 minutes, show me why I should care." You don't explain. You demonstrate.</p>
+      </div>
+    </div>
+
+    <h2>The Module</h2>
+
+    <div class="module-card">
+      <div class="module-header">
+        <span class="module-number">Single Module</span>
+        <span class="module-title">Sovereign AI Multi-Tenancy in 5 Minutes</span>
+      </div>
+      <p class="module-goal">Show the whole value proposition in one shot</p>
+      <ol class="module-steps">
+        <li>Start from a management cluster with HyperShift already running.</li>
+        <li>Provision a hosted cluster for tenant-a. Show how the control plane runs as pods. No 3-node hardware tax.</li>
+        <li>Install RHOAI on tenant-a's cluster. Quick tour: workbenches, model registry, vLLM serving.</li>
+        <li>Deploy Granite (small, open, fast). Run an inference request.</li>
+        <li>Switch to tenant-b's cluster. Try to access tenant-a's model endpoint. Can't. Try to see tenant-a's model registry. Can't.</li>
+        <li>Show the ACM dashboard. Both tenants compliant, boundaries enforced, audit trail clean.</li>
+        <li>Close: "Everything here runs on open source. The tenant can export their models and pipelines and leave whenever they want. That's the reversibility promise."</li>
+      </ol>
+      <div class="module-takeaway"><strong>Takeaway:</strong> Full AI platform isolation, cost efficient infrastructure, auditable compliance, and portability. That's the pitch. You just saw it work.</div>
+    </div>
+
+    <div class="notes-section">
+      <h3>Notes for Myriam</h3>
+      <ul>
+        <li>This is your elevator pitch as an arcade. Step 1 in the management cluster assumes HyperShift is pre-installed, which saves a few minutes of setup that doesn't add to the story.</li>
+        <li>Granite is a good choice for the demo model because it's small, open, and Red Hat publishes it on Hugging Face. Fast to deploy, fast to serve, no licensing questions.</li>
+        <li>If someone finishes this and wants more, you link them to either the Before/After (Idea 2) for the "why" or the Full Story (Idea 1) for the deep dive.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <h2 style="border-bottom: none; margin-top: 0;">Tech Stack (All Ideas)</h2>
+
+    <div class="tech-grid" style="max-width: 760px; margin: 1rem auto 1.5rem;">
       <div class="tech-item"><strong>Orchestration</strong>OpenShift (management cluster)</div>
       <div class="tech-item"><strong>Isolation</strong>HyperShift (hosted control planes)</div>
       <div class="tech-item"><strong>Virtualization</strong>OpenShift Virtualization</div>
@@ -468,17 +689,6 @@
       <div class="tech-item"><strong>Demo Model</strong>Granite (small, open)</div>
     </div>
 
-    <div class="notes-section">
-      <h3>Notes for Myriam</h3>
-      <ul>
-        <li>The blog is really well written -- the narrative builds cleanly from misconception to solution to honest caveats. The arcade should keep that same honesty (especially the "GPUs were not designed as multi-tenant security devices" moment).</li>
-        <li>The agentic AI observability teaser at the end of the blog could be a "coming soon" slide in the arcade -- good hook for future content.</li>
-        <li>Consider whether the arcade target audience is the <strong>platform admin</strong> (who builds this) or the <strong>tenant</strong> (who consumes it) -- the blog speaks to both but the arcade steps would be different depending on perspective. Recommendation: platform admin perspective for the arcade, since they are the ones making the architecture decisions.</li>
-      </ul>
-    </div>
-  </article>
-
-  <footer>
     <div class="footer-links">
       <a href="../index.html">Interactive Overview</a>
       <a href="../blog/">Sovereign AI Blog</a>
@@ -487,5 +697,24 @@
       Markell Rawls | AI Developer Advocate, Red Hat
     </div>
   </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(target).classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
