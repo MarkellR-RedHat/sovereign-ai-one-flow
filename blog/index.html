@@ -236,29 +236,29 @@
     </p>
 
     <p>
-      This isn't hypothetical &mdash; it happens every quarter, because frontier model providers retire endpoints, adjust rate limits, change terms of service, or simply shut down products. If your AI strategy depends on services you don't own, then it also depends on decisions you can't influence.
+      This isn't hypothetical, and it happens every quarter because frontier model providers retire endpoints, adjust rate limits, change terms of service, or simply shut down products. If your AI strategy depends on services you don't own, then it also depends on decisions you can't influence.
     </p>
 
     <h2>What sovereignty actually means</h2>
 
     <p>
-      When most people hear "sovereign AI," they think self-hosting &mdash; run it on your own servers and keep data in your own data center. That's part of it, but it misses the point entirely.
+      When most people hear "sovereign AI," they think self-hosting: run it on your own servers and keep data in your own data center. That's part of it, but it misses the point entirely.
     </p>
 
     <div class="pullquote">
-      Sovereign AI is agency &mdash; the ability of your organization to make its own decisions, enforce its own rules, and implement its own policies over AI infrastructure, without external interference.
+      Sovereign AI is agency: the ability of your organization to make its own decisions, enforce its own rules, and implement its own policies over AI infrastructure, without external interference.
     </div>
 
     <p>
-      Think about what sovereignty means for a nation. A sovereign nation doesn't just occupy territory &mdash; it makes its own laws, controls its own borders, and determines its own economic policy, because it isn't beholden to another entity for the right to govern itself.
+      Think about what sovereignty means for a nation. A sovereign nation doesn't just occupy territory; it makes its own laws, controls its own borders, and determines its own economic policy because it isn't beholden to another entity for the right to govern itself.
     </p>
 
     <p>
-      Sovereign AI is the same concept applied to your organization's AI infrastructure. It means your platform team decides which models to deploy, which teams get access, what rate limits apply, what compliance policies to enforce, and how much it costs &mdash; not a vendor, not a cloud provider, and not a third-party API service.
+      Sovereign AI is the same concept applied to your organization's AI infrastructure. It means your platform team decides which models to deploy, which teams get access, what rate limits apply, what compliance policies to enforce, and how much it costs, rather than leaving those decisions to a vendor, a cloud provider, or a third-party API service.
     </p>
 
     <p>
-      This is fundamentally different from self-hosting. You can self-host and still lack sovereignty &mdash; if your models come from a single vendor with restrictive licensing, if your tooling locks you into one cloud, if your inference stack can't run disconnected. Sovereignty is about the independence of your decisions, not just the location of your hardware.
+      This is fundamentally different from self-hosting. You can self-host and still lack sovereignty if your models come from a single vendor with restrictive licensing, if your tooling locks you into one cloud, or if your inference stack can't run disconnected. Sovereignty is about the independence of your decisions, not just the location of your hardware.
     </p>
 
     <h2>Why this matters now</h2>
@@ -268,11 +268,11 @@
     </p>
 
     <p>
-      <strong>Regulatory pressure is accelerating.</strong> The EU AI Act requires audit trails that many organizations simply cannot provide when inference happens on someone else's cloud. FIPS, FedRAMP, DORA, PCI-DSS &mdash; the regulatory alphabet is growing, and every new requirement assumes you can demonstrate control over your AI supply chain. If you're calling a vendor API, proving compliance means trusting their attestation. Sovereign infrastructure means proving it yourself, on your own systems, with your own logs.
+      <strong>Regulatory pressure is accelerating.</strong> The EU AI Act requires audit trails that many organizations simply cannot provide when inference happens on someone else's cloud. The regulatory alphabet (FIPS, FedRAMP, DORA, PCI-DSS) is growing, and every new requirement assumes you can demonstrate control over your AI supply chain. If you're calling a vendor API, proving compliance means trusting their attestation. Sovereign infrastructure means proving it yourself, on your own systems, with your own logs.
     </p>
 
     <p>
-      <strong>Shadow AI is already here.</strong> The <a href="https://hai.stanford.edu/research/ai-index-report">Stanford Digital Economy Lab's</a> enterprise AI playbook found that 70 to 80% of employees using AI at work rely on tools not approved by their employer &mdash; personal AWS accounts, unauthorized Claude credits, and models downloaded from HuggingFace onto department desktops. When your organization can't provide fast, governed access to AI models, developers find their own way, and when they do, you lose visibility, compliance, and cost control simultaneously.
+      <strong>Shadow AI is already here.</strong> The <a href="https://hai.stanford.edu/research/ai-index-report">Stanford Digital Economy Lab's</a> enterprise AI playbook found that 70 to 80% of employees using AI at work rely on tools not approved by their employer, including personal AWS accounts, unauthorized Claude credits, and models downloaded from HuggingFace onto department desktops. When your organization can't provide fast, governed access to AI models, developers find their own way, and when they do, you lose visibility, compliance, and cost control simultaneously.
     </p>
 
     <p>
@@ -288,7 +288,7 @@
     <ul class="outcome-list">
       <li>
         <span class="outcome-label">Policy governance</span>
-        Admin defines the rules for AI consumption &mdash; which teams access which models, what rate limits apply, what compliance constraints are enforced. These are your organization's rules, not vendor defaults. When a request exceeds policy, the infrastructure enforces it automatically.
+        Admin defines the rules for AI consumption, including which teams access which models, what rate limits apply, and what compliance constraints are enforced. These are your organization's rules, not vendor defaults. When a request exceeds policy, the infrastructure enforces it automatically.
       </li>
       <li>
         <span class="outcome-label">Team independence</span>
@@ -296,7 +296,7 @@
       </li>
       <li>
         <span class="outcome-label">Cost transparency</span>
-        "What did AI cost us this quarter, by department?" should be a question you can answer in real-time, not one that requires three weeks and a spreadsheet. Token-level metering per team and per model, with full-stack visibility from API keys to GPU utilization. Platform owners get feedback on health, usage, and consumption &mdash; continuously.
+        "What did AI cost us this quarter, by department?" should be a question you can answer in real-time, not one that requires three weeks and a spreadsheet. Token-level metering per team and per model, with full-stack visibility from API keys to GPU utilization. Platform owners get continuous feedback on health, usage, and consumption.
       </li>
       <li>
         <span class="outcome-label">Continuous safety</span>
@@ -309,7 +309,7 @@
     </ul>
 
     <p>
-      Notice what's not on this list: specific product names, technical architectures, or implementation details. That's intentional. Sovereign AI is about what your organization can <em>do</em>, not what software it runs. The capabilities above are outcomes that enable agency &mdash; the specifics of how you get there will depend on your infrastructure, your requirements, and your existing investments.
+      Notice what's not on this list: specific product names, technical architectures, or implementation details. That's intentional. Sovereign AI is about what your organization can <em>do</em>, not what software it runs. The capabilities above are outcomes that enable agency, and the specifics of how you get there will depend on your infrastructure, your requirements, and your existing investments.
     </p>
 
     <h2>The internal AI service provider</h2>
@@ -319,21 +319,21 @@
     </p>
 
     <p>
-      If this sounds familiar, it should &mdash; it's the same pattern enterprises adopted for databases a decade ago. Central IT runs the database platform, and application teams don't each stand up their own Postgres clusters. Instead, they request a database, get connection credentials, and build their application while the platform handles provisioning, scaling, monitoring, and compliance.
+      If this sounds familiar, it should, because it's the same pattern enterprises adopted for databases a decade ago. Central IT runs the database platform, and application teams don't each stand up their own Postgres clusters. Instead, they request a database, get connection credentials, and build their application while the platform handles provisioning, scaling, monitoring, and compliance.
     </p>
 
     <p>
-      Apply that same model to AI inference, and you get something powerful: every developer in the organization has access to governed AI models through a standard API, while the platform team maintains full control over security, cost, and compliance. Shadow AI disappears because there's no reason for it &mdash; the governed path is faster than the unsanctioned one.
+      Apply that same model to AI inference, and you get something powerful: every developer in the organization has access to governed AI models through a standard API, while the platform team maintains full control over security, cost, and compliance. Shadow AI disappears because there's no reason for it when the governed path is faster than the unsanctioned one.
     </p>
 
     <div class="callout-dark callout">
-      <p>This pattern works on any infrastructure &mdash; public cloud, on-premises, air-gapped, or hybrid &mdash; because sovereignty comes from who controls the decisions, not where the hardware sits.</p>
+      <p>This pattern works on any infrastructure (public cloud, on-premises, air-gapped, or hybrid) because sovereignty comes from who controls the decisions, not where the hardware sits.</p>
     </div>
 
     <h2>Proven at scale</h2>
 
     <p>
-      This isn't theoretical &mdash; organizations across sectors are already building sovereign AI infrastructure.
+      This isn't theoretical, and organizations across sectors are already building sovereign AI infrastructure.
     </p>
 
     <div class="proof-grid">
@@ -356,7 +356,7 @@
     </div>
 
     <p>
-      A <a href="https://www.redhat.com/en/resources/forrester-tei-openshift-ai-analyst-material">Forrester Total Economic Impact study</a> found <strong>233% ROI</strong> for organizations adopting this approach &mdash; driven by consolidation of fragmented AI tooling, elimination of shadow AI spend, and operational efficiencies from centralized governance.
+      A <a href="https://www.redhat.com/en/resources/forrester-tei-openshift-ai-analyst-material">Forrester Total Economic Impact study</a> found <strong>233% ROI</strong> for organizations adopting this approach, driven by consolidation of fragmented AI tooling, elimination of shadow AI spend, and operational efficiencies from centralized governance.
     </p>
 
     <h2>Sovereignty is a choice</h2>
@@ -366,11 +366,11 @@
     </p>
 
     <p>
-      The first is to continue depending on vendors &mdash; building on APIs you don't control, hoping deprecation notices come with enough lead time, trying to prove regulatory compliance through someone else's attestation, and discovering shadow AI deployments after they've already leaked data or run up unauthorized bills. This path works until it doesn't.
+      The first is to continue depending on vendors by building on APIs you don't control, hoping deprecation notices come with enough lead time, trying to prove regulatory compliance through someone else's attestation, and discovering shadow AI deployments after they've already leaked data or run up unauthorized bills. This path works until it doesn't.
     </p>
 
     <p>
-      The second is to build infrastructure that puts your organization in charge &mdash; owning the model lifecycle, defining your own policies, attributing costs to the teams that incur them, and enforcing security at the infrastructure level so you can run the same stack on-prem, in the cloud, or air-gapped, wherever your requirements demand.
+      The second is to build infrastructure that puts your organization in charge by owning the model lifecycle, defining your own policies, attributing costs to the teams that incur them, and enforcing security at the infrastructure level so you can run the same stack on-prem, in the cloud, or air-gapped, wherever your requirements demand.
     </p>
 
     <p>
